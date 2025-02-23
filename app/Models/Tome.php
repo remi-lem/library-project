@@ -8,11 +8,10 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class Tome
- *
+ * 
  * @property int $ISBN
  * @property int $numero
  * @property string $couverture
@@ -56,9 +55,4 @@ class Tome extends Model
 		'idAuteur',
 		'idEditeur'
 	];
-
-    public function auteur(): HasOne {
-        return $this->hasOne(Auteur::class);
-    }
-
 }

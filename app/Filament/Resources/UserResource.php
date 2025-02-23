@@ -23,7 +23,19 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->label('Full Name'),
+
+                Forms\Components\TextInput::make('email')
+                    ->email()
+                    ->required()
+                    ->unique(User::class, 'email', ignoreRecord: true),
+
+                Forms\Components\TextInput::make('password')
+                    ->password()
+                    ->required(fn ($context) => $context === 'create') // Required only when creating
+                    ->hiddenOn('edit'), // Hide password field when editing
             ]);
     }
 
@@ -31,7 +43,8 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')->sortable(),
+                Tables\Columns\TextColumn::make('email')->sortable(),
             ])
             ->filters([
                 //
