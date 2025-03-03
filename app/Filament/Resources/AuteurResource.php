@@ -6,9 +6,11 @@ use App\Filament\Resources\AuteurResource\Pages;
 use App\Filament\Resources\AuteurResource\RelationManagers;
 use App\Models\Auteur;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -17,13 +19,18 @@ class AuteurResource extends Resource
 {
     protected static ?string $model = Auteur::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-pencil';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                TextInput::make('nom')
+                    ->required()
+                    ->maxLength(25),
+                TextInput::make('prenom')
+                    ->required()
+                    ->maxLength(25),
             ]);
     }
 
@@ -31,7 +38,12 @@ class AuteurResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('nom')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('prenom')
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 //

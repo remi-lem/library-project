@@ -6,9 +6,11 @@ use App\Filament\Resources\TagLivreResource\Pages;
 use App\Filament\Resources\TagLivreResource\RelationManagers;
 use App\Models\TagLivre;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -17,13 +19,15 @@ class TagLivreResource extends Resource
 {
     protected static ?string $model = TagLivre::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                TextInput::make('nom')
+                    ->required()
+                    ->maxLength(25),
             ]);
     }
 
@@ -31,7 +35,9 @@ class TagLivreResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('nom')
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 //

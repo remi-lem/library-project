@@ -6,9 +6,11 @@ use App\Filament\Resources\GenreLivreResource\Pages;
 use App\Filament\Resources\GenreLivreResource\RelationManagers;
 use App\Models\GenreLivre;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -17,13 +19,15 @@ class GenreLivreResource extends Resource
 {
     protected static ?string $model = GenreLivre::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-identification';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                TextInput::make('nom')
+                    ->required()
+                    ->maxLength(25),
             ]);
     }
 
@@ -31,7 +35,9 @@ class GenreLivreResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('nom')
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 //
