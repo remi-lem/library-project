@@ -65,6 +65,40 @@ class SerieController extends Controller{
         return view('series.index', compact('series'));
     }
 
+    //Recherche filtrée
+    public function filter(Request $request){
+        $query = Serie::query();
+
+        foreach ($request->all() as $key => $value) {
+            if (!empty($value)) {
+                $query->where($key, '=', $value);
+            }
+        }
+
+        $series = $query->get();
+        return view('series.index', compact('series'));
+    }
+
+    //Recherche triée
+    public function sort(Request $request){
+        $series = Serie::orderBy($request->sort)->get();
+        return view('series.index', compact('series'));
+    }
+
+    //Recherche triée et filtrée
+    public function sortFilter(Request $request){
+        $query = Serie::query();
+
+        foreach ($request->all() as $key => $value) {
+            if (!empty($value)) {
+                $query->where($key, '=', $value);
+            }
+        }
+
+        $series = $query->orderBy($request->sort)->get();
+        return view('series.index', compact('series'));
+    }
+
 
 }
 ?>
