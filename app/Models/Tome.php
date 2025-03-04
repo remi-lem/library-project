@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Tome
- * 
+ *
  * @property int $ISBN
  * @property int $numero
  * @property string $couverture
@@ -55,4 +55,36 @@ class Tome extends Model
 		'idAuteur',
 		'idEditeur'
 	];
+
+    // Relations
+
+    public function edition()
+    {
+        return $this->belongsTo(Edition::class, 'idEdition');
+    }
+
+    public function typeLivre()
+    {
+        return $this->belongsTo(TypeLivre::class, 'idTypeLivre');
+    }
+
+    public function tagLivre()
+    {
+        return $this->belongsTo(TagLivre::class, 'idTagLivre');
+    }
+
+    public function genreLivre()
+    {
+        return $this->belongsTo(GenreLivre::class, 'idGenreLivre');
+    }
+
+    public function auteur()
+    {
+        return $this->belongsTo(Auteur::class, 'idAuteur');
+    }
+
+    public function editeur()
+    {
+        return $this->belongsTo(Editeur::class, 'idEditeur');
+    }
 }

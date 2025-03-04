@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Edition
- * 
+ *
  * @property int $id
  * @property string $nom
  * @property int $idSerie
@@ -30,4 +30,8 @@ class Edition extends Model
 		'nom',
 		'idSerie'
 	];
+
+    public function serie() {
+        return $this->belongsTo(Serie::class, 'idSerie');
+    }
 }

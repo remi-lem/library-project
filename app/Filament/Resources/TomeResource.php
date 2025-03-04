@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\TomeResource\Pages;
 use App\Filament\Resources\TomeResource\RelationManagers;
+use App\Models\Edition;
 use App\Models\Tome;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -30,38 +31,53 @@ class TomeResource extends Resource
         return $form
             ->schema([
                 TextInput::make('ISBN')
+                    ->label('ISBN')
                     ->required()
                     ->numeric(),
                 TextInput::make('numero')
+                    ->label('Numéro')
                     ->required()
                     ->numeric(),
                 FileUpload::make('couverture')
                     ->image(),
                 DatePicker::make('dateParution')
+                    ->label('Date de parution')
                     ->required(),
                 Select::make('idEdition')
                     ->label('Édition')
                     ->relationship('edition', 'nom')
+                    ->searchable()
+                    ->createOptionForm([
+                        TextInput::make('nom')
+                            ->label('Nom de l\'édition')
+                            ->required(),
+                    ])
                     ->required(),
                 Select::make('idTypeLivre')
                     ->label('Type de livre')
                     ->relationship('typeLivre', 'nom')
+                    ->searchable()
                     ->required(),
                 Select::make('idTagLivre')
+                    ->multiple()
                     ->label('Tag')
                     ->relationship('tagLivre', 'nom')
+                    ->searchable()
                     ->required(),
                 Select::make('idGenreLivre')
                     ->label('Genre')
                     ->relationship('genreLivre', 'nom')
+                    ->searchable()
                     ->required(),
                 Select::make('idAuteur')
                     ->label('Auteur')
                     ->relationship('auteur', 'nom')
+                    ->searchable()
                     ->required(),
                 Select::make('idEditeur')
                     ->label('Éditeur')
                     ->relationship('editeur', 'nom')
+                    ->searchable()
                     ->required(),
             ]);
     }
