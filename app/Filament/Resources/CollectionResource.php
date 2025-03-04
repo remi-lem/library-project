@@ -2,41 +2,36 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\EditionResource\Pages;
-use App\Models\Edition;
+use App\Filament\Resources\CollectionResource\Pages;
+use App\Models\Collection;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class EditionResource extends Resource
+class CollectionResource extends Resource
 {
-    protected static ?string $model = Edition::class;
+    protected static ?string $model = Collection::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
+    protected static ?string $navigationIcon = 'heroicon-o-square-3-stack-3d';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('nom')
-                    ->required()
-                    ->maxLength(25),
-                Select::make('idSerie')
-                    ->label('Série')
-                    ->relationship('serie', 'nom')
+                Select::make('ISBN')
+                    ->label('Tome')
+                    ->relationship('tome', 'ISBN')
                     ->searchable()
-                    ->createOptionForm([
-                        TextInput::make('nom')
-                            ->label('Nom de la série')
-                            ->required(),
-                        TextInput::make('synopsis')
-                            ->label('Synopsis')
-                            ->required(),
-                    ])
+                    ->required(),
+
+                Select::make('id')
+                    ->label('Utilisateur')
+                    ->relationship('user', 'name')
+                    ->searchable()
+                    ->preload()
                     ->required(),
             ]);
     }
@@ -45,11 +40,12 @@ class EditionResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('nom')
+                TextColumn::make('tome.ISBN')
+                    ->label('Tome')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('serie.nom')
-                    ->label('Série')
+                TextColumn::make('user.name')
+                    ->label('Utilisateur')
                     ->sortable()
                     ->searchable(),
             ])
@@ -76,9 +72,9 @@ class EditionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListEditions::route('/'),
-            'create' => Pages\CreateEdition::route('/create'),
-            'edit' => Pages\EditEdition::route('/{record}/edit'),
+            'index' => Pages\ListCollections::route('/'),
+            'create' => Pages\CreateCollection::route('/create'),
+            'edit' => Pages\EditCollection::route('/{record}/edit'),
         ];
     }
 }

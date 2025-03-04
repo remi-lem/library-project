@@ -9,7 +9,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class COLLECTION
+ * Class Collection
  * 
  * @property int $id
  * @property int $ISBN
@@ -19,9 +19,9 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class COLLECTION extends Model
+class Collection extends Model
 {
-	protected $table = 'COLLECTION';
+	protected $table = 'Collection';
 	public $incrementing = false;
 	public $timestamps = false;
 

@@ -45,6 +45,7 @@ class Tome extends Model
 	];
 
 	protected $fillable = [
+        'ISBN',
 		'numero',
 		'couverture',
 		'dateParution',

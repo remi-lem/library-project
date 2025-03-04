@@ -3,10 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TomeResource\Pages;
-use App\Filament\Resources\TomeResource\RelationManagers;
-use App\Models\Edition;
 use App\Models\Tome;
-use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
@@ -17,8 +14,6 @@ use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TomeResource extends Resource
 {
@@ -32,14 +27,33 @@ class TomeResource extends Resource
             ->schema([
                 TextInput::make('ISBN')
                     ->label('ISBN')
-                    ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->maxLength(13)
+                    ->required(),
                 TextInput::make('numero')
                     ->label('Numéro')
+                    ->rules([
+                        'integer',
+                        'min:0',
+                    ])
                     ->required()
                     ->numeric(),
                 FileUpload::make('couverture')
-                    ->image(),
+                    ->image()
+                //TODO : corriger l'import d'images en tant que blob
+                    /*->reactive()
+                    ->afterStateUpdated(function ($state, $set) {
+                        // Check if the state (file) is not null
+                        if ($state) {
+                            // Get the uploaded file's real path
+                            $image = file_get_contents($state->getRealPath());
+
+                            // Optionally, you can store the image as a BLOB in the database
+                            $set('image', $image);
+                        } else {
+                            $set('image', null); // Make sure to clear it if no file is selected
+                        }
+                    })*/,
                 DatePicker::make('dateParution')
                     ->label('Date de parution')
                     ->required(),
@@ -51,34 +65,82 @@ class TomeResource extends Resource
                         TextInput::make('nom')
                             ->label('Nom de l\'édition')
                             ->required(),
-                    ])
-                    ->required(),
+                        Select::make('idSerie')
+                            ->label('Série')
+                            ->relationship('serie', 'nom')
+                            ->searchable()
+                            ->createOptionForm([
+                                TextInput::make('nom')
+                                    ->label('Nom de la série')
+                                    ->unique('Serie', 'nom')
+                                    ->required(),
+                                TextInput::make('synopsis')
+                                    ->label('Synopsis')
+                                    ->required(),
+                            ])
+                            ->required(),
+                    ]),
                 Select::make('idTypeLivre')
                     ->label('Type de livre')
                     ->relationship('typeLivre', 'nom')
                     ->searchable()
+                    ->createOptionForm([
+                        TextInput::make('nom')
+                            ->label('Nom')
+                            ->required()
+                            ->unique('TypeLivre', 'nom'),
+                    ])
                     ->required(),
                 Select::make('idTagLivre')
-                    ->multiple()
-                    ->label('Tag')
+                    //->multiple()//TODO : autoriser des tags multiples (table a ajouter)
+                    ->label('Tags')
                     ->relationship('tagLivre', 'nom')
                     ->searchable()
-                    ->required(),
+                    ->createOptionForm([
+                        TextInput::make('nom')
+                            ->label('Nom')
+                            ->required()
+                            ->unique('TagLivre', 'nom'),
+                    ]),
+
                 Select::make('idGenreLivre')
                     ->label('Genre')
-                    ->relationship('genreLivre', 'nom')
+                    ->relationship('GenreLivre', 'nom')
                     ->searchable()
+                    ->createOptionForm([
+                        TextInput::make('nom')
+                            ->label('Nom')
+                            ->required()
+                            ->unique('GenreLivre', 'nom'),
+                    ])
                     ->required(),
+
                 Select::make('idAuteur')
                     ->label('Auteur')
-                    ->relationship('auteur', 'nom')
+                    ->relationship('Auteur', 'nom')
                     ->searchable()
+                    ->createOptionForm([
+                        TextInput::make('nom')
+                            ->label('Nom')
+                            ->required(),
+                        TextInput::make('prenom')
+                            ->label('Prénom')
+                            ->required(),
+                    ])
                     ->required(),
+
                 Select::make('idEditeur')
                     ->label('Éditeur')
-                    ->relationship('editeur', 'nom')
+                    ->relationship('Editeur', 'nom')
                     ->searchable()
+                    ->createOptionForm([
+                        TextInput::make('nom')
+                            ->label('Nom')
+                            ->required()
+                            ->unique('Editeur', 'nom'),
+                    ])
                     ->required(),
+
             ]);
     }
 

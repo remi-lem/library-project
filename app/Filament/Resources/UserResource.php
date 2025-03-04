@@ -32,8 +32,8 @@ class UserResource extends Resource
 
                 TextInput::make('password')
                     ->password()
-                    ->required(fn ($context) => $context === 'create') // Required only when creating
-                    ->hiddenOn('edit'), // Hide password field when editing
+                    ->required(fn ($context) => $context === 'create')
+                    ->hiddenOn('edit'),
             ]);
     }
 
