@@ -28,7 +28,14 @@ php artisan serve
 ```shell
 git clone https://<USER>:<TOKEN>@github.com/remi-lem/library-project.git
 ```
-- effectuer les commandes de mise en place ci-dessus
+- effectuer les commandes de mise en place
+```shell
+composer update
+composer install --no-dev
+npm update
+npm install --omit=dev
+npm run build
+```
 - mettre la racine du serveur sur /public
 
 ## Accès
