@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\EditeurResource\Pages;
 use App\Models\Editeur;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -24,6 +25,10 @@ class EditeurResource extends Resource
                 TextInput::make('nom')
                     ->required()
                     ->maxLength(25),
+                TextInput::make('imgPattern')
+                    ->label("Pattern URL des images de couverture")
+                    ->hint("Remplacez l'ISBN par <IMG>.")
+                    ->maxLength(255),
             ]);
     }
 
@@ -34,6 +39,8 @@ class EditeurResource extends Resource
                 TextColumn::make('nom')
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('imgPattern')
+                    ->label("Pattern URL de couverture"),
             ])
             ->filters([
                 //

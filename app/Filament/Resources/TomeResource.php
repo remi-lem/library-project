@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TomeResource\Pages;
 use App\Models\Tome;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -38,22 +37,11 @@ class TomeResource extends Resource
                     ])
                     ->required()
                     ->numeric(),
-                FileUpload::make('couverture')
-                    ->image()
-                //TODO : corriger l'import d'images en tant que blob
-                    /*->reactive()
-                    ->afterStateUpdated(function ($state, $set) {
-                        // Check if the state (file) is not null
-                        if ($state) {
-                            // Get the uploaded file's real path
-                            $image = file_get_contents($state->getRealPath());
-
-                            // Optionally, you can store the image as a BLOB in the database
-                            $set('image', $image);
-                        } else {
-                            $set('image', null); // Make sure to clear it if no file is selected
-                        }
-                    })*/,
+                TextInput::make('couverture')
+                    ->label('URL de la couverture'),
+                TextInput::make('titre')
+                    ->label('Titre')
+                    ->required(),
                 DatePicker::make('dateParution')
                     ->label('Date de parution')
                     ->required(),
@@ -149,9 +137,15 @@ class TomeResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('ISBN')
+                    ->label('ISBN')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('titre')
+                    ->label('Titre')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('numero')
+                    ->label("Numéro")
                     ->sortable(),
                 ImageColumn::make('couverture')
                     ->label('Couverture'),

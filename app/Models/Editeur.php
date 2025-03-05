@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property int $id
  * @property string $nom
+ * @property string|null $imgPattern
  *
  * @package App\Models
  */
@@ -22,6 +23,7 @@ class Editeur extends Model
 	public $timestamps = false;
 
 	protected $fillable = [
-		'nom'
+		'nom',
+		'imgPattern'
 	];
 }

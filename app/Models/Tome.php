@@ -14,11 +14,11 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $ISBN
  * @property int $numero
- * @property string $couverture
+ * @property string|null $couverture
  * @property Carbon $dateParution
- * @property int $idEdition
+ * @property int|null $idEdition
  * @property int $idTypeLivre
- * @property int $idTagLivre
+ * @property int|null $idTagLivre
  * @property int $idGenreLivre
  * @property int $idAuteur
  * @property int $idEditeur
