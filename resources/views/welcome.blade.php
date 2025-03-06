@@ -12,11 +12,14 @@
     <h1>Bienvenue sur {{config('app.name')}}</h1>
 
     @guest
-        <a href="{{route('register')}}">Créer un compte</a>
+        <a class="btn btn-primary" href="{{route('register')}}">Créer un compte</a>
+        <a class="btn btn-primary" href="{{route('dashboard-library')}}">Se connecter</a>
     @endguest
 
     @auth
-        <a href="{{route('dashboard-library')}}">Accéder à ma bibliothèque</a>
+        <a class="btn btn-primary" href="{{route('dashboard-library')}}">Accéder à ma bibliothèque</a>
     @endauth
+
+    {{--//TODO presentation (image)--}}
 
 @endsection
