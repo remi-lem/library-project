@@ -12,7 +12,7 @@ class SerieController extends Controller{
     //affiche All
     public function index(){
         $series = Serie::all();
-        return view('series.index', compact('series'));
+        return view('serie.index', compact('series'));
     }
 
     //affiche un élément
@@ -22,14 +22,14 @@ class SerieController extends Controller{
         foreach($editions as $edition){
             $tomeEditions[$edition->id] = Tome::where('edition_id', $edition->id)->get();
         }
-        return view('series.show', compact('serie'));
+        return view('serie.show', compact('serie'));
     }
 
 
     //Création/suppression/modification
     //Page
     public function create(){
-        return view('series.create');
+        return view('serie.create');
     }
 
     //Action
@@ -38,31 +38,31 @@ class SerieController extends Controller{
         $serie->title = $request->title;
         $serie->publication_year = $request->publication_year;
         $serie->save();
-        return redirect()->route('series.index');
+        return redirect()->route('serie.index');
     }
 
     public function destroy(Serie $serie){
         $serie->delete();
-        return redirect()->route('series.index');
+        return redirect()->route('serie.index');
     }
 
     //Page
     public function edit(Serie $serie){
-        return view('series.edit', compact('serie'));
+        return view('serie.edit', compact('serie'));
     }
     //Action
     public function update(Request $request, Serie $serie){
         $serie->title = $request->title;
         $serie->publication_year = $request->publication_year;
         $serie->save();
-        return redirect()->route('series.index');
+        return redirect()->route('serie.index');
     }
 
     //Recherche par titre
     public function search(Request $request){
         $search = $request->search;
         $series = Serie::where('title', 'like', "%$search%")->get();
-        return view('series.index', compact('series'));
+        return view('serie.index', compact('series'));
     }
 
     //Recherche filtrée
@@ -76,13 +76,13 @@ class SerieController extends Controller{
         }
 
         $series = $query->get();
-        return view('series.index', compact('series'));
+        return view('serie.index', compact('series'));
     }
 
     //Recherche triée
     public function sort(Request $request){
         $series = Serie::orderBy($request->sort)->get();
-        return view('series.index', compact('series'));
+        return view('serie.index', compact('series'));
     }
 
     //Recherche triée et filtrée
@@ -96,7 +96,7 @@ class SerieController extends Controller{
         }
 
         $series = $query->orderBy($request->sort)->get();
-        return view('series.index', compact('series'));
+        return view('serie.index', compact('series'));
     }
 
 

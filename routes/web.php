@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\dashboard\Library;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SerieController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboard\Analytics;
 use App\Http\Controllers\layouts\WithoutMenu;
@@ -55,6 +56,9 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard-library', [Library::class, 'index'])->name('dashboard-library');
 });
+
+//SERIES
+Route::get('/series', [SerieController::class, 'index'])->name('serie.index');
 
 
 
