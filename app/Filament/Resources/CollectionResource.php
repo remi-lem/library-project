@@ -23,7 +23,7 @@ class CollectionResource extends Resource
             ->schema([
                 Select::make('ISBN')
                     ->label('Tome')
-                    ->relationship('tome', 'ISBN')
+                    ->relationship('tome', 'titre')
                     ->searchable()
                     ->required(),
 
@@ -40,7 +40,7 @@ class CollectionResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('tome.ISBN')
+                TextColumn::make('tome.titre')
                     ->label('Tome')
                     ->sortable()
                     ->searchable(),

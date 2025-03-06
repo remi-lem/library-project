@@ -9,16 +9,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class TagLivre
- * 
+ * Class Tag
+ *
  * @property int $id
  * @property string $nom
  *
  * @package App\Models
  */
-class TagLivre extends Model
+class Tag extends Model
 {
-	protected $table = 'TagLivre';
+	protected $table = 'Tag';
 	public $timestamps = false;
 
 	protected $fillable = [

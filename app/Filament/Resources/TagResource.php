@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TagLivreResource\Pages;
-use App\Models\TagLivre;
+use App\Filament\Resources\TagResource\Pages;
+use App\Models\Tag;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -11,9 +11,9 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class TagLivreResource extends Resource
+class TagResource extends Resource
 {
-    protected static ?string $model = TagLivre::class;
+    protected static ?string $model = Tag::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
@@ -58,9 +58,9 @@ class TagLivreResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTagLivres::route('/'),
-            'create' => Pages\CreateTagLivre::route('/create'),
-            'edit' => Pages\EditTagLivre::route('/{record}/edit'),
+            'index' => Pages\ListTag::route('/'),
+            'create' => Pages\CreateTag::route('/create'),
+            'edit' => Pages\EditTag::route('/{record}/edit'),
         ];
     }
 }

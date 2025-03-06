@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $dateParution
  * @property int|null $idEdition
  * @property int $idTypeLivre
- * @property int|null $idTagLivre
  * @property int $idGenreLivre
  * @property int $idAuteur
  * @property int $idEditeur
@@ -38,7 +37,6 @@ class Tome extends Model
 		'dateParution' => 'datetime',
 		'idEdition' => 'int',
 		'idTypeLivre' => 'int',
-		'idTagLivre' => 'int',
 		'idGenreLivre' => 'int',
 		'idAuteur' => 'int',
 		'idEditeur' => 'int'
@@ -51,7 +49,6 @@ class Tome extends Model
 		'dateParution',
 		'idEdition',
 		'idTypeLivre',
-		'idTagLivre',
 		'idGenreLivre',
 		'idAuteur',
 		'idEditeur'
@@ -69,9 +66,9 @@ class Tome extends Model
         return $this->belongsTo(TypeLivre::class, 'idTypeLivre');
     }
 
-    public function tagLivre()
+    public function tags()
     {
-        return $this->belongsTo(TagLivre::class, 'idTagLivre');
+        return $this->belongsToMany(Tag::class, 'TagTome', 'ISBN', 'idTag');
     }
 
     public function genreLivre()

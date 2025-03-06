@@ -28,6 +28,12 @@ php artisan serve
 ```shell
 git clone https://<USER>:<TOKEN>@github.com/remi-lem/library-project.git
 ```
+- récupérer le fichier .env et modifier les valeurs suivantes
+```
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=http://localhost
+```
 - effectuer les commandes de mise en place
 ```shell
 composer update

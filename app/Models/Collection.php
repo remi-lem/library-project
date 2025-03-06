@@ -10,10 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Collection
- * 
+ *
  * @property int $id
  * @property int $ISBN
- * 
+ *
  * @property Tome $tome
  * @property User $user
  *
@@ -29,6 +29,11 @@ class Collection extends Model
 		'id' => 'int',
 		'ISBN' => 'int'
 	];
+
+    protected $fillable = [
+        'id',
+        'ISBN'
+    ];
 
 	public function tome()
 	{

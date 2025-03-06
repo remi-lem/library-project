@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $nom
  * @property string $prenom
+ * @property string|null $nomComplet
  *
  * @package App\Models
  */
@@ -24,6 +25,7 @@ class Auteur extends Model
 
 	protected $fillable = [
 		'nom',
-		'prenom'
+		'prenom',
+		'nomComplet'
 	];
 }

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TomeResource\Pages;
+use App\Models\Auteur;
 use App\Models\Tome;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
@@ -29,6 +30,49 @@ class TomeResource extends Resource
                     ->numeric()
                     ->maxLength(13)
                     ->required(),
+                TextInput::make('titre')
+                    ->label('Titre')
+                    ->required(),
+                Select::make('idEditeur')
+                    ->label('Éditeur')
+                    ->relationship('Editeur', 'nom')
+                    ->searchable()
+                    ->createOptionForm([
+                        TextInput::make('nom')
+                            ->label('Nom')
+                            ->required()
+                            ->unique('Editeur', 'nom'),
+                    ])
+                    ->required(),
+                TextInput::make('couverture')
+                    ->label('URL de la couverture'),
+                Select::make('idAuteur')
+                    ->label('Auteur')
+                    ->relationship('Auteur', 'nomComplet')
+                    ->searchable()
+                    ->createOptionForm([
+                        TextInput::make('nom')
+                            ->label('Nom')
+                            ->required(),
+                        TextInput::make('prenom')
+                            ->label('Prénom')
+                            ->required(),
+                    ])
+                    ->required(),
+                Select::make('idGenreLivre')
+                    ->label('Genre')
+                    ->relationship('GenreLivre', 'nom')
+                    ->searchable()
+                    ->createOptionForm([
+                        TextInput::make('nom')
+                            ->label('Nom')
+                            ->required()
+                            ->unique('GenreLivre', 'nom'),
+                    ])
+                    ->required(),
+                DatePicker::make('dateParution')
+                    ->label('Date de parution')
+                    ->required(),
                 TextInput::make('numero')
                     ->label('Numéro')
                     ->rules([
@@ -37,14 +81,6 @@ class TomeResource extends Resource
                     ])
                     ->required()
                     ->numeric(),
-                TextInput::make('couverture')
-                    ->label('URL de la couverture'),
-                TextInput::make('titre')
-                    ->label('Titre')
-                    ->required(),
-                DatePicker::make('dateParution')
-                    ->label('Date de parution')
-                    ->required(),
                 Select::make('idEdition')
                     ->label('Édition')
                     ->relationship('edition', 'nom')
@@ -79,56 +115,17 @@ class TomeResource extends Resource
                             ->unique('TypeLivre', 'nom'),
                     ])
                     ->required(),
-                Select::make('idTagLivre')
-                    //->multiple()//TODO : autoriser des tags multiples (table a ajouter)
+                Select::make('tags')
+                    ->multiple()
                     ->label('Tags')
-                    ->relationship('tagLivre', 'nom')
+                    ->relationship('tags', 'nom')
                     ->searchable()
                     ->createOptionForm([
                         TextInput::make('nom')
                             ->label('Nom')
                             ->required()
-                            ->unique('TagLivre', 'nom'),
+                            ->unique('Tag', 'nom'),
                     ]),
-
-                Select::make('idGenreLivre')
-                    ->label('Genre')
-                    ->relationship('GenreLivre', 'nom')
-                    ->searchable()
-                    ->createOptionForm([
-                        TextInput::make('nom')
-                            ->label('Nom')
-                            ->required()
-                            ->unique('GenreLivre', 'nom'),
-                    ])
-                    ->required(),
-
-                Select::make('idAuteur')
-                    ->label('Auteur')
-                    ->relationship('Auteur', 'nom')
-                    ->searchable()
-                    ->createOptionForm([
-                        TextInput::make('nom')
-                            ->label('Nom')
-                            ->required(),
-                        TextInput::make('prenom')
-                            ->label('Prénom')
-                            ->required(),
-                    ])
-                    ->required(),
-
-                Select::make('idEditeur')
-                    ->label('Éditeur')
-                    ->relationship('Editeur', 'nom')
-                    ->searchable()
-                    ->createOptionForm([
-                        TextInput::make('nom')
-                            ->label('Nom')
-                            ->required()
-                            ->unique('Editeur', 'nom'),
-                    ])
-                    ->required(),
-
             ]);
     }
 
@@ -144,12 +141,24 @@ class TomeResource extends Resource
                     ->label('Titre')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('numero')
-                    ->label("Numéro")
-                    ->sortable(),
+                TextColumn::make('editeur.nom')
+                    ->label('Éditeur')
+                    ->sortable()
+                    ->searchable(),
                 ImageColumn::make('couverture')
                     ->label('Couverture'),
+                TextColumn::make('auteur.nomComplet')
+                    ->label('Auteur')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('genreLivre.nom')
+                    ->label('Genre')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('dateParution')
+                    ->sortable(),
+                TextColumn::make('numero')
+                    ->label("Numéro")
                     ->sortable(),
                 TextColumn::make('edition.nom')
                     ->label('Édition')
@@ -159,21 +168,10 @@ class TomeResource extends Resource
                     ->label('Type de livre')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('tagLivre.nom')
-                    ->label('Tag')
+                TextColumn::make('tags.nom')
+                    ->label('Tags')
                     ->sortable()
-                    ->searchable(),
-                TextColumn::make('genreLivre.nom')
-                    ->label('Genre')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('auteur.nom')
-                    ->label('Auteur')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('editeur.nom')
-                    ->label('Éditeur')
-                    ->sortable()
+                    ->badge()
                     ->searchable(),
             ])
             ->filters([
