@@ -6,6 +6,18 @@
             "icon": "menu-icon tf-icons bx bx-home",
             "slug": "accueil",
             "url": "/"
+        },
+        {
+            "name": "Dashboard",
+            "icon": "menu-icon tf-icons bx bx-chalkboard",
+            "slug": "dashboard",
+            "url": "/dashboard-library"
+        },
+        {
+            "name": "Accès à l'espace d'administration",
+            "icon": "menu-icon tf-icons bx bx-data",
+            "slug": "admin",
+            "url": "/admin"
         }
     ]
 }

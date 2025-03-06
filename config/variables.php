@@ -3,7 +3,7 @@
   return [
     "creatorName" => "Rémi L., Wilhem M.",
     //"creatorUrl" => "",
-    "templateName" => "sneat",
+    "templateName" => "Bibliotech",
     "templateSuffix" => "Bootstrap Dashboard FREE",
     //"templateVersion" => "2.0.0",
     "templateFree" => true,

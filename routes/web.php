@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\dashboard\Library;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboard\Analytics;
@@ -52,7 +53,7 @@ Route::get('/', function () {
 
 // PERSO
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard-library', [\App\Http\Controllers\dashboard\Library::class, 'index'])->name('dashboard-library');
+    Route::get('/dashboard-library', [Library::class, 'index'])->name('dashboard-library');
 });
 
 
@@ -65,13 +66,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('/dashboard', function () {
+/*Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');*/
 
 // SNEAT
-
-Route::middleware('auth')->group(function () {
+/*Route::middleware('auth')->group(function () {
     Route::get('/dashboard2', [Analytics::class, 'index'])->name('dashboard-analytics');
 
     // layout
@@ -134,6 +134,6 @@ Route::middleware('auth')->group(function () {
 
     // tables
     Route::get('/tables/basic', [TablesBasic::class, 'index'])->name('tables-basic');
-});
+});*/
 
 require __DIR__.'/auth.php';
