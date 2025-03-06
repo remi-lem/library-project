@@ -45,23 +45,34 @@ use App\Http\Controllers\form_layouts\VerticalForm;
 use App\Http\Controllers\form_layouts\HorizontalForm;
 use App\Http\Controllers\tables\Basic as TablesBasic;
 
+// ACCUEIL
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard2', [Analytics::class, 'index'])->name('dashboard-analytics');
+// PERSO
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard-library', [\App\Http\Controllers\dashboard\Library::class, 'index'])->name('dashboard-library');
+});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
+
+
+
+// BREEZE
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
+// SNEAT
 
-
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard2', [Analytics::class, 'index'])->name('dashboard-analytics');
 
     // layout
     Route::get('/layouts/without-menu', [WithoutMenu::class, 'index'])->name('layouts-without-menu');

@@ -1,0 +1,11 @@
+{
+    "urlSourceIcones": "https://boxicons.com/",
+    "menu": [
+        {
+            "name": "Accueil",
+            "icon": "menu-icon tf-icons bx bx-home",
+            "slug": "accueil",
+            "url": "/"
+        }
+    ]
+}
