@@ -9,7 +9,7 @@
   <title>@yield('title') | {{config("app.name")}}</title>
   <meta name="description" content="{{ config('variables.templateDescription') ? config('variables.templateDescription') : '' }}" />
   <meta name="keywords" content="{{ config('variables.templateKeyword') ? config('variables.templateKeyword') : '' }}">
-  <meta property="og:image" content="{{asset("Bibliotech.png")}}" />
+  <meta property="og:image" content="{{asset("Bibliothech.png")}}" />
   <!-- laravel CRUD token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Canonical SEO -->
