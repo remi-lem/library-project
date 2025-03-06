@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\Serie as Serie; //def du modèle en le renommant
-use app\Models\Edition as Edition;
-use app\Models\Tome as Tome;
+use App\Models\Serie;
+use App\Models\Edition;
+use App\Models\Tome;
 
-class SerieController extends Controller{
+class SerieController extends Controller {
 
     //affiche All
     public function index(){

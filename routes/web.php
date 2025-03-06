@@ -3,6 +3,7 @@
 use App\Http\Controllers\dashboard\Library;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SerieController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboard\Analytics;
 use App\Http\Controllers\layouts\WithoutMenu;
@@ -55,13 +56,14 @@ Route::get('/', function () {
 // PERSO
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard-library', [Library::class, 'index'])->name('dashboard-library');
+
+    //Séries
+    Route::get('/series', [SerieController::class, 'index'])->name('serie.index');
+
+
+
+
 });
-
-//SERIES
-Route::get('/series', [SerieController::class, 'index'])->name('serie.index');
-
-
-
 
 
 // BREEZE
@@ -75,7 +77,7 @@ Route::middleware('auth')->group(function () {
 })->middleware(['auth', 'verified'])->name('dashboard');*/
 
 // SNEAT
-/*Route::middleware('auth')->group(function () {
+Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::get('/dashboard2', [Analytics::class, 'index'])->name('dashboard-analytics');
 
     // layout
@@ -138,6 +140,6 @@ Route::middleware('auth')->group(function () {
 
     // tables
     Route::get('/tables/basic', [TablesBasic::class, 'index'])->name('tables-basic');
-});*/
+});
 
 require __DIR__.'/auth.php';
