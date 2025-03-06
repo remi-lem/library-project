@@ -15,5 +15,5 @@
 @endsection
 
 @section('content')
-    RIEN
+    <!--TODO : remplir le dashboard-->
 @endsection

@@ -5,14 +5,14 @@
 
 @extends('layouts/contentNavbarLayoutLibrary')
 
-@section('title', 'Without menu - Layouts')
+@section('title', 'Accueil')
 
 @section('content')
 
     <h1>Bienvenue sur {{config('app.name')}}</h1>
 
     @auth
-        <a href="{{route('dashboard-library')}}">Accéder à {{config('app.name')}}</a>
+        <a href="{{route('dashboard-library')}}">Accéder à ma bibliothèque</a>
     @endauth
 
 @endsection
