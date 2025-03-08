@@ -19,7 +19,7 @@ class SerieController extends Controller {
             }
         }
         //Si la 
-        return "resources/image/No-Cover-Image-01.png";
+        return asset('images/noCover.png');
     }
 
     //affiche All
