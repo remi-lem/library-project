@@ -9,10 +9,33 @@ use App\Models\Tome;
 
 class SerieController extends Controller {
 
+    //Donne la couverture d'une série (celle du 1er Tome)
+    private function cover(Serie $serie){
+        $edition = Edition::where('idSerie', $serie->id)->first();
+        if($edition){
+            $tome = Tome::where('idEdition', $edition->id)->first();
+            if($tome){
+                return $tome->couverture;
+            }
+        }
+        //Si la 
+        return "resources\image\No-Cover-Image-01.png";
+    }
+
     //affiche All
     public function index(){
-        $series = Serie::all();
-        return view('serie.index', compact('series'));
+        $series = Serie::paginate(20); //On pagine à 20 séries par page. 5 séries par ligne
+        //Nouvelle collection pour ajouter les couvertures
+        $seriesWithCover = collect();
+        foreach($series as $serie){
+            $seriesWithCover->push([
+                'id' => $serie->id,
+                'nom' => $serie->nom,
+                'synopsis' => $serie->synopsis,
+                'cover' => $this->cover($serie)
+            ]);
+        }
+        return view('serie.index', compact('seriesWithCover','series'));
     }
 
     //affiche un élément
