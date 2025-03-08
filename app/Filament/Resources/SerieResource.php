@@ -27,7 +27,7 @@ class SerieResource extends Resource
                     ->maxLength(25),
                 Textarea::make('synopsis')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(500),
             ]);
     }
 

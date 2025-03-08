@@ -17,25 +17,34 @@
 
 @section('content')
     <h1>Les séries</h1>
-    <p> {{ $series->total() }} séries dans la base </p>
     
-    <div class="row">
         @foreach ($seriesWithCover->chunk(5) as $chunk)
+            <div class="row row-cols-1 row-cols-md-3 g-4 mb-4 justify-content-center">
             @foreach ($chunk as $s)
-                <div class="col-md-2">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-nom">{{ $s["nom"] }}</h5>
-                            <img src="{{ $s["cover"] }}" alt="couverture" class="card-img-top">
-                            {{-- <a href="{{ route('serie.show', $s["id"]) }}" class="btn btn-primary">Voir la série</a> --}}
+                <div class="col-md-2 d-flex justify-content-center">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-center">{{ Str::limit($s["nom"], 15, '...') }}</h5>
+                            <img src="{{ $s["cover"] }}" alt="couverture" class="card-img mb-3" style="object-fit: contain; height: 200px;">
+                            {{-- <a href="{{ route('serie.show', $s["id"]) }}" class="btn btn-primary mt-auto">Voir la série</a> --}}
                         </div>
                     </div>
                 </div>
             @endforeach
+            </div>
         @endforeach
-    </div>
+    
 
     <div class="d-flex justify-content-center">
-        {{ $series->links() }}
+        {{ $series->onEachSide(1)->links('pagination::bootstrap-4') }}
+    </div>
+    <div class="d-flex justify-content-center">
+        @php
+            $displayedSeries = $series->perPage() * $series->currentPage();
+            if ($displayedSeries > $series->total()) {
+            $displayedSeries = $series->total();
+            }
+        @endphp
+        <p>{{ $displayedSeries }} séries affichées sur {{ $series->total() }}</p>
     </div>
 @endsection
