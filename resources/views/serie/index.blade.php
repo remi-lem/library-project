@@ -4,6 +4,7 @@
 
 @section('vendor-style')
 @vite('resources/assets/vendor/libs/apex-charts/apex-charts.scss')
+
 @endsection
 
 @section('vendor-script')
@@ -25,7 +26,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-nom">{{ $s["nom"] }}</h5>
-                            <img src="{{ $s["cover"] }}" alt="couverture" class="card-cover">
+                            <img src="{{ $s["cover"] }}" alt="couverture" class="card-img-top">
                             {{-- <a href="{{ route('serie.show', $s["id"]) }}" class="btn btn-primary">Voir la série</a> --}}
                         </div>
                     </div>
