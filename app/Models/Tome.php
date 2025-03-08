@@ -34,6 +34,8 @@ class Tome extends Model
 	protected $casts = [
 		'ISBN' => 'int',
 		'numero' => 'int',
+        'titre' => 'string',
+        'couverture' => 'string',
 		'dateParution' => 'datetime',
 		'idEdition' => 'int',
 		'idTypeLivre' => 'int',
@@ -45,6 +47,7 @@ class Tome extends Model
 	protected $fillable = [
         'ISBN',
 		'numero',
+        'titre',
 		'couverture',
 		'dateParution',
 		'idEdition',
