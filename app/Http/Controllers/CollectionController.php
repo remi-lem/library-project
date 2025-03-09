@@ -30,11 +30,11 @@ class CollectionController extends Controller {
         $tomeId = $request->input('ISBN');
         $userId = auth()->id();
         
-        //v"rifier si le tome est dans la collection de l'utilisateur
+        //vérifie si le tome est dans la collection de l'utilisateur
         $collection = Collection::where('id', $userId)->where('ISBN', $tomeId)->first();
         if($collection){
-            // Retirer le tome de la collection de l'utilisateur
-            $collection->delete();
+            // Supprimer la ligne dans la collection où id = $userId et ISBN = $tomeId
+            Collection::where('id', $userId)->where('ISBN', $tomeId)->delete();
             return redirect()->back()->with('success', 'Le tome a été retiré de la collection.');
         }
         return redirect()->back()->with('error', 'Le tome n\'a pas pu être retiré de la collection.');
