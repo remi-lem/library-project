@@ -108,7 +108,7 @@ class SerieController extends Controller {
                 'id' => $serie->id,
                 'nom' => $serie->nom,
                 'synopsis' => $serie->synopsis,
-                'cover' => $this->cover($serie)
+                'cover' => $this->cover($serie->id)
             ]);
         }
 
