@@ -18,6 +18,12 @@
             "icon": "menu-icon tf-icons bx bx-data",
             "slug": "admin",
             "url": "/admin"
+        },
+        {
+            "name" : "Les séries",
+            "icon": "menu-icon tf-icons bx bx-book",
+            "slug": "series",
+            "url": "/series"
         }
     ]
 }

@@ -59,10 +59,8 @@ Route::middleware('auth')->group(function () {
 
     //Séries
     Route::get('/series', [SerieController::class, 'index'])->name('serie.index');
-
-
-
-
+    Route::get('/series/{serie}', [SerieController::class, 'show'])->name('serie.show');
+    Route::get('/series/recherche', [SerieController::class, 'recherche'])->name('serie.recherche');
 });
 
 

@@ -17,7 +17,16 @@
 
 @section('content')
     <h1>Les séries</h1>
-    
+    <form action="{{ route('serie.recherche') }}" method="GET" class="mb-4">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" name="nom" class="form-control" placeholder="Nom de la série">
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </div>
+    </form>
         @foreach ($seriesWithCover->chunk(5) as $chunk)
             <div class="row row-cols-1 row-cols-md-3 g-4 mb-4 justify-content-center">
             @foreach ($chunk as $s)
