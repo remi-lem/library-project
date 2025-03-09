@@ -4,26 +4,26 @@
         {
             "name": "Accueil",
             "icon": "menu-icon tf-icons bx bx-home",
-            "slug": "accueil",
+            "slug": "accueil.index",
             "url": "/"
         },
         {
             "name": "Dashboard",
             "icon": "menu-icon tf-icons bx bx-chalkboard",
-            "slug": "dashboard",
+            "slug": "dashboard-library",
             "url": "/dashboard-library"
+        },
+        {
+            "name" : "Les séries",
+            "icon": "menu-icon tf-icons bx bx-book",
+            "slug": "serie.index",
+            "url": "/series"
         },
         {
             "name": "Accès à l'espace d'administration",
             "icon": "menu-icon tf-icons bx bx-data",
             "slug": "admin",
             "url": "/admin"
-        },
-        {
-            "name" : "Les séries",
-            "icon": "menu-icon tf-icons bx bx-book",
-            "slug": "series",
-            "url": "/series"
         }
     ]
 }

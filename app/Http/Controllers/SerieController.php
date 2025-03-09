@@ -19,7 +19,9 @@ class SerieController extends Controller {
         if($edition){
             $tome = Tome::where('idEdition', $edition->id)->first();
             if($tome){
-                return $tome->couverture;
+                if($tome->couverture != null){
+                    return $tome->couverture;
+                }
             }
         }
         //Si la couverture n'existe pas ou pas trouvable, on renvoie une image par défaut
@@ -66,7 +68,7 @@ class SerieController extends Controller {
         }
         return $tomes;
     }
-    
+
 
 
     //Pages
@@ -120,7 +122,7 @@ class SerieController extends Controller {
         //Chercher la série
         $serie = Serie::findOrFail($id);
 
-        //la couverture 
+        //la couverture
         $cover = $this->cover($serie->id);
 
         //les tags de la série
@@ -129,7 +131,7 @@ class SerieController extends Controller {
         //les tomes de la collection de l'utilisateur
         $tomesCollectionUser = $this->tomesCollectionUser($serie->id, auth()->id());
 
-        //Chercher les éditions et les tomes    
+        //Chercher les éditions et les tomes
         $editions = Edition::where('idSerie', $serie->id)->get();
         $tomeEditions = [];
         foreach($editions as $edition){
@@ -138,7 +140,7 @@ class SerieController extends Controller {
         return view('serie.show', compact('serie', 'editions', 'tomeEditions','cover','tags','tomesCollectionUser'));
     }
 
-    
+
 
 
 }

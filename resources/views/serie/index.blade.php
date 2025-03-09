@@ -4,7 +4,6 @@
 
 @section('vendor-style')
 @vite('resources/assets/vendor/libs/apex-charts/apex-charts.scss')
-
 @endsection
 
 @section('vendor-script')
@@ -28,7 +27,7 @@
         </div>
     </form>
         @foreach ($seriesWithCover->chunk(5) as $chunk)
-            <div class="row row-cols-1 row-cols-md-3 g-4 mb-4 justify-content-center">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mb-4 justify-content-center">
             @foreach ($chunk as $s)
                 <div class="col-md-2 d-flex justify-content-center" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                     <div class="card h-100" style="width: 100%;">
@@ -42,7 +41,7 @@
             @endforeach
             </div>
         @endforeach
-    
+
 
     <div class="d-flex justify-content-center">
         {{ $series->appends(request()->input())->onEachSide(1)->links('pagination::bootstrap-4') }}
