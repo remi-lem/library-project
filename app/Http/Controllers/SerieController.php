@@ -54,9 +54,9 @@ class SerieController extends Controller {
         $query = Serie::query();
 
         //Filtrage
-        /*if ($request->has('nom') && !empty($request->input('nom'))) {
+        if ($request->has('nom') && !empty($request->input('nom'))) {
             $query->where('nom', 'LIKE', '%' . $request->input('nom') . '%');
-        }*/
+        }
 
         //Tri
         $sortField = $request->input('sort', 'nom'); // Par défaut, trier par nom

@@ -58,9 +58,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard-library', [Library::class, 'index'])->name('dashboard-library');
 
     //Séries
-    Route::get('/series', [SerieController::class, 'index'])->name('serie.index');
-    Route::get('/series/{serie}', [SerieController::class, 'show'])->name('serie.show');
     Route::get('/series/recherche', [SerieController::class, 'recherche'])->name('serie.recherche');
+    Route::get('/series/{serie}', [SerieController::class, 'show'])->name('serie.show');
+    Route::get('/series', [SerieController::class, 'index'])->name('serie.index');
+    
+    
 });
 
 

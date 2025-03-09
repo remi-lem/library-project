@@ -45,7 +45,7 @@
     
 
     <div class="d-flex justify-content-center">
-        {{ $series->onEachSide(1)->links('pagination::bootstrap-4') }}
+        {{ $series->appends(request()->input())->onEachSide(1)->links('pagination::bootstrap-4') }}
     </div>
     <div class="d-flex justify-content-center">
         @php
