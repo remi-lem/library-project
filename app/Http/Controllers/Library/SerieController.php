@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Library;
 
 use Illuminate\Http\Request;
 use App\Models\Serie;
@@ -9,7 +9,9 @@ use App\Models\Tome;
 use \App\Models\TagTome;
 use \App\Models\Tag;
 use \App\Models\Auteur;
+use App\Http\Controllers\Controller;
 use App\Models\Collection;
+
 
 class SerieController extends Controller {
 
@@ -165,4 +167,4 @@ class SerieController extends Controller {
 
 
 }
-?>
+
