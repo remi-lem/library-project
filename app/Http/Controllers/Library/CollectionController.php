@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Library;
 
-use Illuminate\Http\Request;
-use App\Models\Tome;
+use App\Http\Controllers\Controller;
 use App\Models\Collection;
+use Illuminate\Http\Request;
 
 class CollectionController extends Controller {
 
@@ -14,7 +14,7 @@ class CollectionController extends Controller {
         //id Tome et user
         $tomeId = $request->input('ISBN');
         $userId = auth()->id();
-        
+
         // Ajoutez le tome à la collection de l'utilisateur
         $collection = new Collection();
         $collection->id = $userId;
@@ -29,7 +29,7 @@ class CollectionController extends Controller {
         //id Tome et user
         $tomeId = $request->input('ISBN');
         $userId = auth()->id();
-        
+
         //vérifie si le tome est dans la collection de l'utilisateur
         $collection = Collection::where('id', $userId)->where('ISBN', $tomeId)->first();
         if($collection){

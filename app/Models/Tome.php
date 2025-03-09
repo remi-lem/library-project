@@ -8,7 +8,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-
+//TODO : permettre d'avoir plusieurs auteurs
 /**
  * Class Tome
  *

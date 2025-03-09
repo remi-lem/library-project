@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Library;
 
-use Illuminate\Http\Request;
-use App\Models\Serie;
-use App\Models\Edition;
-use App\Models\Tome;
-use \App\Models\TagTome;
+use App\Http\Controllers\Controller;
 use App\Models\Collection;
+use App\Models\Edition;
+use App\Models\Serie;
+use App\Models\TagTome;
+use App\Models\Tome;
+use Illuminate\Http\Request;
 
 class SerieController extends Controller {
 
@@ -144,4 +145,4 @@ class SerieController extends Controller {
 
 
 }
-?>
+

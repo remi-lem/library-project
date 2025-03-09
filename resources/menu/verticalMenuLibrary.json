@@ -23,7 +23,8 @@
             "name": "Accès à l'espace d'administration",
             "icon": "menu-icon tf-icons bx bx-data",
             "slug": "admin",
-            "url": "/admin"
+            "url": "/admin",
+            "adminOnly": true
         }
     ]
 }
