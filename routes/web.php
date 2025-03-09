@@ -66,6 +66,7 @@ Route::middleware('auth')->group(function () {
 
     //Collections
     Route::post('/add-to-collection', [CollectionController::class, 'addTome'])->name('collection.addTome');
+    Route::post('/remove-from-collection', [CollectionController::class, 'removeTome'])->name('collection.removeTome');
     //Route::get('/collections', [CollectionController::class, 'index'])->name('collection.index');
 
     
