@@ -17,7 +17,7 @@ class SerieController extends Controller {
     private function cover(int $idSerie){
         $edition = Edition::where('idSerie', $idSerie)->first();
         if($edition){
-            $tome = Tome::where('idEdition', $edition->id)->first();
+            $tome = Tome::where('idEdition', $edition->id)->orderBy("numero")->first();
             if($tome){
                 if($tome->couverture != null){
                     return $tome->couverture;
@@ -135,7 +135,7 @@ class SerieController extends Controller {
         $editions = Edition::where('idSerie', $serie->id)->get();
         $tomeEditions = [];
         foreach($editions as $edition){
-            $tomeEditions[$edition->id] = Tome::where('idEdition', $edition->id)->get();
+            $tomeEditions[$edition->id] = Tome::where('idEdition', $edition->id)->orderBy("numero")->get();
         }
         return view('serie.show', compact('serie', 'editions', 'tomeEditions','cover','tags','tomesCollectionUser'));
     }
