@@ -16,6 +16,8 @@
   <ul class="menu-inner py-1">
     @foreach ($menuLibraryData[0]->menu as $menu)
 
+      {{--TODO si admin on affiche pas--}}
+
       {{-- adding active and open class if child is active --}}
 
       {{-- menu headers --}}
