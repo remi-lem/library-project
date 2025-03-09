@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tome;
+use App\Models\Edition;
+use App\Models\Serie;
 use App\Models\Collection;
+
 
 class CollectionController extends Controller {
 
-
-    //ajouter un tome à la collection
+    // Ajouter un tome à la collection
     public function addTome(Request $request){
-        //id Tome et user
         $tomeId = $request->input('ISBN');
         $userId = auth()->id();
         
@@ -24,13 +25,12 @@ class CollectionController extends Controller {
         return redirect()->back()->with('success', 'Le tome a été ajouté à la collection.');
     }
 
-    //retirer un tome de la collection
+    // Retirer un tome de la collection
     public function removeTome(Request $request){
-        //id Tome et user
         $tomeId = $request->input('ISBN');
         $userId = auth()->id();
         
-        //vérifie si le tome est dans la collection de l'utilisateur
+        // Vérifie si le tome est dans la collection de l'utilisateur
         $collection = Collection::where('id', $userId)->where('ISBN', $tomeId)->first();
         if($collection){
             // Supprimer la ligne dans la collection où id = $userId et ISBN = $tomeId
@@ -39,4 +39,66 @@ class CollectionController extends Controller {
         }
         return redirect()->back()->with('error', 'Le tome n\'a pas pu être retiré de la collection.');
     }
+
+    // Pages
+
+    // Afficher les séries dont l'utilisateur a des tomes dans sa collection
+    public function index(){
+        //requête pour récupérer les séries dont l'utilisateur a des tomes dans sa collection
+        $series = Serie::whereIn('id', function($query) {
+            $query->select('Edition.idSerie')
+            ->from('Collection')
+            ->join('Tome', 'Collection.ISBN', '=', 'Tome.ISBN')
+            ->join('Edition', 'Tome.idEdition', '=', 'Edition.id')
+            ->where('Collection.id', auth()->id());
+        })->orderBy('nom')->paginate(20);
+
+        // Nouvelle collection pour ajouter les couvertures
+        $seriesWithCover = collect();
+        foreach($series as $serie){
+            $seriesWithCover->push([
+            'id' => $serie->id,
+            'nom' => $serie->nom,
+            'synopsis' => $serie->synopsis,
+            'cover' => SerieController::cover($serie->id)
+            ]);
+        }
+
+        return view('serie.index', compact('seriesWithCover', 'series'));
+    }
+
+    // Recherche triée et filtrée
+    public function recherche(Request $request){
+        $query = Serie::query();
+
+        // Filtrage
+        if ($request->has('nom') && !empty($request->input('nom'))) {
+            $query->where('nom', 'LIKE', '%' . $request->input('nom') . '%');
+        }
+
+        // Tri
+        $sortField = $request->input('sort', 'nom'); // Par défaut, trier par nom
+        $series = $query->whereIn('id', function($query) {
+            $query->select('Edition.idSerie')
+            ->from('Collection')
+            ->join('Tome', 'Collection.ISBN', '=', 'Tome.ISBN')
+            ->join('Edition', 'Tome.idEdition', '=', 'Edition.id')
+            ->where('Collection.id', auth()->id());
+        })->orderBy($sortField)->paginate(20); // On pagine à 20 séries par page. 5 séries par ligne
+
+        // Nouvelle collection pour ajouter les couvertures
+        $seriesWithCover = collect();
+        foreach($series as $serie){
+            $seriesWithCover->push([
+                'id' => $serie->id,
+                'nom' => $serie->nom,
+                'synopsis' => $serie->synopsis,
+                'cover' => SerieController::cover($serie->id)
+            ]);
+        }
+
+        return view('serie.index', compact('seriesWithCover', 'series'));
+    }
+
+    
 }

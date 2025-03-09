@@ -20,6 +20,12 @@
             "url": "/series"
         },
         {
+            "name": "Ma collection",
+            "icon": "menu-icon tf-icons bx bx-collection",
+            "slug": "collection.index",
+            "url": "/collection"
+        },
+        {
             "name": "Accès à l'espace d'administration",
             "icon": "menu-icon tf-icons bx bx-data",
             "slug": "admin",

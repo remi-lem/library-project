@@ -7,6 +7,8 @@ use App\Models\Serie;
 use App\Models\Edition;
 use App\Models\Tome;
 use \App\Models\TagTome;
+use \App\Models\Tag;
+use \App\Models\Auteur;
 use App\Models\Collection;
 
 class SerieController extends Controller {
@@ -14,7 +16,7 @@ class SerieController extends Controller {
     //Actions générales
 
     //Donne la couverture d'une série (celle du 1er Tome)
-    private function cover(int $idSerie){
+    public static function cover(int $idSerie){
         $edition = Edition::where('idSerie', $idSerie)->first();
         if($edition){
             $tome = Tome::where('idEdition', $edition->id)->orderBy("numero")->first();
@@ -40,14 +42,30 @@ class SerieController extends Controller {
             foreach($tomes as $tome){
                 $tagTomes = TagTome::where('ISBN', $tome->ISBN)->get();
                 foreach($tagTomes as $tagTome){
-                    $tag = \App\Models\Tag::find($tagTome->idTag);
+                    $tag = Tag::find($tagTome->idTag);
                     if ($tag) {
                         $tags->push($tag->nom);
                     }
                 }
             }
         }
-        return $tags->unique();
+        return $tags->unique()->take(5); // on prend max 5 tags pour ne pas faire dépasser la liste
+    }
+
+    //Les différents auteurs d'une série
+    private function auteurs(int $idSerie){
+        $auteurs = collect();
+        $editions = Edition::where('idSerie', $idSerie)->get();
+        foreach($editions as $edition){
+            $tomes = Tome::where('idEdition', $edition->id)->get();
+            foreach($tomes as $tome){
+                $auteur = Auteur::find($tome->idAuteur);
+                if ($auteur) {
+                    $auteurs->push($auteur->nom . ' ' . $auteur->prenom);
+                }
+            }
+        }
+        return $auteurs->unique();
     }
 
     //Donne les tomes d'une collection d'un utilisateur selon une série
@@ -128,6 +146,9 @@ class SerieController extends Controller {
         //les tags de la série
         $tags = $this->tags($serie->id);
 
+        //les auteurs de la série
+        $auteurs = $this->auteurs($serie->id);
+
         //les tomes de la collection de l'utilisateur
         $tomesCollectionUser = $this->tomesCollectionUser($serie->id, auth()->id());
 
@@ -137,7 +158,7 @@ class SerieController extends Controller {
         foreach($editions as $edition){
             $tomeEditions[$edition->id] = Tome::where('idEdition', $edition->id)->orderBy("numero")->get();
         }
-        return view('serie.show', compact('serie', 'editions', 'tomeEditions','cover','tags','tomesCollectionUser'));
+        return view('serie.show', compact('serie', 'editions', 'tomeEditions','cover','tags','auteurs','tomesCollectionUser'));
     }
 
 

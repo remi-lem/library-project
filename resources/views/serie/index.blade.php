@@ -1,6 +1,10 @@
 @extends('layouts/contentNavbarLayoutLibrary')
 
-@section('title', 'Les séries')
+@if (request()->route()->getName() == 'serie.index' || request()->route()->getName() == 'serie.recherche')
+    @section('title', 'Les séries')
+@elseif (request()->route()->getName() == 'collection.index'|| request()->route()->getName() == 'collection.recherche')
+    @section('title', 'Ma Collection')
+@endif
 
 @section('vendor-style')
 @vite('resources/assets/vendor/libs/apex-charts/apex-charts.scss')
@@ -15,16 +19,24 @@
 @endsection
 
 @section('content')
-    <h1>Les séries</h1>
-    <form action="{{ route('serie.recherche') }}" method="GET" class="mb-4">
-        <div class="row">
-            <div class="col-md-4">
-                <input type="text" name="nom" class="form-control" placeholder="Nom de la série">
+
+    
+    @if (request()->route()->getName() == 'serie.index' || request()->route()->getName() == 'serie.recherche')
+        <h1>Les séries</h1>
+        <form action="{{ route('serie.recherche') }}" method="GET" class="mb-4">
+    @elseif (request()->route()->getName() == 'collection.index' || request()->route()->getName() == 'collection.recherche')
+        <h1>Ma collection</h1>
+        <form action="{{ route('collection.recherche') }}" method="GET" class="mb-4">
+    @endif
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text" name="nom" class="form-control" placeholder="Nom de la série">
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary">Rechercher</button>
+                </div>
             </div>
-            <div class="col-md-4">
-                <button type="submit" class="btn btn-primary">Rechercher</button>
-            </div>
-        </div>
+        </form>
     </form>
         @foreach ($seriesWithCover->chunk(5) as $chunk)
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mb-4 justify-content-center">

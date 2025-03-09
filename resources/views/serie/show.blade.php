@@ -64,6 +64,7 @@
                     <li>{{ $tag }}</li>
                 @endforeach
             </ul>
+            <p> <span class="fs-4 fw-bold"> Auteur(s) :</span> @foreach ($auteurs as $a) {{ $a }}, @endforeach</p>
         </div>
     </div>
 
@@ -82,7 +83,7 @@
                 @foreach ($chunk as $tome)
                     <div class="col-md-1">
                         <div class="tome-container">
-                            <img src="{{ $tome->couverture }}" alt="couverture" class="img-fluid tome-image" style="{{ in_array($tome->ISBN, $tomesCollectionUser) ? '' : 'opacity: 0.5;' }}; cursor: pointer;" onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity='{{ in_array($tome->ISBN, $tomesCollectionUser) ? '1' : '0.5' }}';" onclick="showPopup('{{ $tome->ISBN }}', '{{ $tome->titre }}', '{{ in_array($tome->ISBN, $tomesCollectionUser) ? 'remove' : 'add' }}')">
+                            <img src="{{ ($tome->couverture != "") ? $tome->couverture : asset('images/noCover.png') }}" alt="couverture" class="img-fluid tome-image" style="{{ in_array($tome->ISBN, $tomesCollectionUser) ? '' : 'opacity: 0.5;' }}; cursor: pointer;" onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity='{{ in_array($tome->ISBN, $tomesCollectionUser) ? '1' : '0.5' }}';" onclick="showPopup('{{ $tome->ISBN }}', '{{ $tome->titre }}', '{{ in_array($tome->ISBN, $tomesCollectionUser) ? 'remove' : 'add' }}')">
                             <div class="tome-title">{{ $tome->titre }}</div>
                         </div>
                     </div>
