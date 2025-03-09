@@ -16,12 +16,22 @@
                 document.getElementById('popupAddCollectionLabel').innerText = 'Ajouter à ma collection';
                 document.getElementById('popupMessage').innerText = 'Êtes-vous sûr de vouloir ajouter ce tome à votre collection ?';
                 document.getElementById('popupForm').action = '{{ route('collection.addTome') }}';
+
+                //bouton sendAction
                 document.getElementById('popupSubmitButton').innerText = 'Ajouter';
+                document.getElementById('popupSubmitButton').style.backgroundColor = 'purple';
+                document.getElementById('popupSubmitButton').classList.add('btn-primary');
+                document.getElementById('popupSubmitButton').classList.remove('btn-danger');
             } else {
                 document.getElementById('popupAddCollectionLabel').innerText = 'Retirer de ma collection';
                 document.getElementById('popupMessage').innerText = 'Êtes-vous sûr de vouloir retirer ce tome de votre collection ?';
                 document.getElementById('popupForm').action = '{{ route('collection.removeTome') }}';
+
+                //bouton sendAction
                 document.getElementById('popupSubmitButton').innerText = 'Retirer';
+                document.getElementById('popupSubmitButton').style.backgroundColor = 'red';
+                document.getElementById('popupSubmitButton').classList.add('btn-danger');
+                document.getElementById('popupSubmitButton').classList.remove('btn-primary');
             }
             var myModal = new bootstrap.Modal(document.getElementById('popupAddCollection'), {
                 keyboard: false
@@ -71,8 +81,8 @@
                 <div class="row mb-3">
                 @foreach ($chunk as $tome)
                     <div class="col-md-1">
-                        <div class="tome-container" >
-                            <img src="{{ $tome->couverture }}" alt="couverture" class="img-fluid tome-image" style="{{ in_array($tome->ISBN, $tomesCollectionUser) ? '' : 'opacity: 0.5;' }}" onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity='{{ in_array($tome->ISBN, $tomesCollectionUser) ? '1' : '0.5' }}';" onclick="showPopup('{{ $tome->ISBN }}', '{{ $tome->titre }}', '{{ in_array($tome->ISBN, $tomesCollectionUser) ? 'remove' : 'add' }}')">
+                        <div class="tome-container">
+                            <img src="{{ $tome->couverture }}" alt="couverture" class="img-fluid tome-image" style="{{ in_array($tome->ISBN, $tomesCollectionUser) ? '' : 'opacity: 0.5;' }}; cursor: pointer;" onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity='{{ in_array($tome->ISBN, $tomesCollectionUser) ? '1' : '0.5' }}';" onclick="showPopup('{{ $tome->ISBN }}', '{{ $tome->titre }}', '{{ in_array($tome->ISBN, $tomesCollectionUser) ? 'remove' : 'add' }}')">
                             <div class="tome-title">{{ $tome->titre }}</div>
                         </div>
                     </div>
@@ -97,7 +107,7 @@
                     <p id="tomeTitle"></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Annuler</button>
                     <form id="popupForm" action="{{ route('collection.addTome') }}" method="POST">
                         @csrf
                         <input type="hidden" name="ISBN" id="ISBN">
