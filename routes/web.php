@@ -3,6 +3,7 @@
 use App\Http\Controllers\dashboard\Library;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SerieController;
+use App\Http\Controllers\CollectionController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboard\Analytics;
@@ -61,6 +62,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/series/recherche', [SerieController::class, 'recherche'])->name('serie.recherche');
     Route::get('/series/{serie}', [SerieController::class, 'show'])->name('serie.show');
     Route::get('/series', [SerieController::class, 'index'])->name('serie.index');
+
+
+    //Collections
+    Route::post('/add-to-collection', [CollectionController::class, 'addTome'])->name('collection.addTome');
+    //Route::get('/collections', [CollectionController::class, 'index'])->name('collection.index');
+
     
     
 });
