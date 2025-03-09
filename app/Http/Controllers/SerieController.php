@@ -10,8 +10,8 @@ use App\Models\Tome;
 class SerieController extends Controller {
 
     //Donne la couverture d'une série (celle du 1er Tome)
-    private function cover(Serie $serie){
-        $edition = Edition::where('idSerie', $serie->id)->first();
+    private function cover(int $idSerie){
+        $edition = Edition::where('idSerie', $idSerie)->first();
         if($edition){
             $tome = Tome::where('idEdition', $edition->id)->first();
             if($tome){
@@ -33,20 +33,27 @@ class SerieController extends Controller {
                 'id' => $serie->id,
                 'nom' => $serie->nom,
                 'synopsis' => $serie->synopsis,
-                'cover' => $this->cover($serie)
+                'cover' => $this->cover($serie->id)
             ]);
         }
         return view('serie.index', compact('seriesWithCover','series'));
     }
 
     //affiche un élément
-    public function show(Serie $serie){
-        $editions = Edition::where('serie_id', $serie->id)->get();
+    public function show(int $id){
+        //Chercher la série
+        $serie = Serie::findOrFail($id);
+
+        //la couverture 
+        $cover = $this->cover($serie->id);
+
+        //Chercher les éditions et les tomes    
+        $editions = Edition::where('idSerie', $serie->id)->get();
         $tomeEditions = [];
         foreach($editions as $edition){
-            $tomeEditions[$edition->id] = Tome::where('edition_id', $edition->id)->get();
+            $tomeEditions[$edition->id] = Tome::where('idEdition', $edition->id)->get();
         }
-        return view('serie.show', compact('serie'));
+        return view('serie.show', compact('serie', 'editions', 'tomeEditions','cover'));
     }
 
     //Recherche triée et filtrée

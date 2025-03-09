@@ -30,12 +30,12 @@
         @foreach ($seriesWithCover->chunk(5) as $chunk)
             <div class="row row-cols-1 row-cols-md-3 g-4 mb-4 justify-content-center">
             @foreach ($chunk as $s)
-                <div class="col-md-2 d-flex justify-content-center">
-                    <div class="card h-100">
+                <div class="col-md-2 d-flex justify-content-center" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div class="card h-100" style="width: 100%;">
+                        <a href="{{ route('serie.show', $s["id"]) }}" class="stretched-link"></a>
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title text-center">{{ Str::limit($s["nom"], 15, '...') }}</h5>
                             <img src="{{ $s["cover"] }}" alt="couverture" class="card-img mb-3" style="object-fit: contain; height: 200px;">
-                            {{-- <a href="{{ route('serie.show', $s["id"]) }}" class="btn btn-primary mt-auto">Voir la série</a> --}}
                         </div>
                     </div>
                 </div>
