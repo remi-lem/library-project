@@ -88,4 +88,8 @@ class Tome extends Model
     {
         return $this->belongsTo(Editeur::class, 'idEditeur');
     }
+
+    public function users(){
+        return $this->belongsToMany(User::class, 'Collection', 'ISBN', 'id');
+    }
 }

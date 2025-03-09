@@ -8,6 +8,12 @@
             "url": "/"
         },
         {
+            "name": "Ma collection",
+            "icon": "menu-icon tf-icons bx bx-collection",
+            "slug": "collection.index",
+            "url": "/collection"
+        },
+        {
             "name": "Dashboard",
             "icon": "menu-icon tf-icons bx bx-chalkboard",
             "slug": "dashboard-library",
@@ -18,12 +24,6 @@
             "icon": "menu-icon tf-icons bx bx-book",
             "slug": "serie.index",
             "url": "/series"
-        },
-        {
-            "name": "Ma collection",
-            "icon": "menu-icon tf-icons bx bx-collection",
-            "slug": "collection.index",
-            "url": "/collection"
         },
         {
             "name": "Accès à l'espace d'administration",

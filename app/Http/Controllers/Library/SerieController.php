@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Serie;
 use App\Models\Edition;
 use App\Models\Tome;
-use \App\Models\TagTome;
-use \App\Models\Tag;
-use \App\Models\Auteur;
+use App\Models\TagTome;
+use App\Models\Tag;
+use App\Models\Auteur;
 use App\Http\Controllers\Controller;
 use App\Models\Collection;
 
@@ -163,8 +163,4 @@ class SerieController extends Controller {
         return view('serie.show', compact('serie', 'editions', 'tomeEditions','cover','tags','auteurs','tomesCollectionUser'));
     }
 
-
-
-
 }
-

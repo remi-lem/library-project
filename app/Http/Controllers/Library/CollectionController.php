@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Library;
 
-use Illuminate\Http\Request;
-use App\Models\Tome;
-use App\Models\Edition;
 use App\Models\Serie;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Collection;
 
@@ -30,13 +28,8 @@ class CollectionController extends Controller {
     public function removeTome(Request $request){
         $tomeId = $request->input('ISBN');
         $userId = auth()->id();
-<<<<<<< HEAD:app/Http/Controllers/CollectionController.php
-        
-        // Vérifie si le tome est dans la collection de l'utilisateur
-=======
 
-        //vérifie si le tome est dans la collection de l'utilisateur
->>>>>>> f866350a271d777b6dc312077e7952f07ca99281:app/Http/Controllers/Library/CollectionController.php
+        // Vérifie si le tome est dans la collection de l'utilisateur
         $collection = Collection::where('id', $userId)->where('ISBN', $tomeId)->first();
         if($collection){
             // Supprimer la ligne dans la collection où id = $userId et ISBN = $tomeId
@@ -45,7 +38,6 @@ class CollectionController extends Controller {
         }
         return redirect()->back()->with('error', 'Le tome n\'a pas pu être retiré de la collection.');
     }
-<<<<<<< HEAD:app/Http/Controllers/CollectionController.php
 
     // Pages
 
@@ -107,8 +99,5 @@ class CollectionController extends Controller {
         return view('serie.index', compact('seriesWithCover', 'series'));
     }
 
-    
+
 }
-=======
-}
->>>>>>> f866350a271d777b6dc312077e7952f07ca99281:app/Http/Controllers/Library/CollectionController.php

@@ -15,5 +15,6 @@
 @endsection
 
 @section('content')
+    <h1>Mon tableau de bord</h1>
     <!--TODO : remplir le dashboard-->
 @endsection

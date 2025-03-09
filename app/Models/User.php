@@ -58,4 +58,8 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->isAdmin();
     }
+
+    public function tomes(){
+        return $this->belongsToMany(Tome::class, 'Collection', 'id', 'ISBN');
+    }
 }

@@ -2,10 +2,6 @@
 
 @section('title', $serie->nom)
 
-@section('vendor-style')
-@vite('resources/assets/vendor/libs/apex-charts/apex-charts.scss')
-@endsection
-
 @section('page-script')
     <script>
         function showPopup(ISBN, titre, action) {
@@ -41,14 +37,6 @@
     </script>
 @endsection
 
-@section('vendor-script')
-@vite('resources/assets/vendor/libs/apex-charts/apexcharts.js')
-@endsection
-
-@section('page-script')
-@vite('resources/assets/js/dashboards-analytics.js')
-@endsection
-
 @section('content')
     <h1>{{ $serie->nom }}</h1>
     <div class="row">
@@ -70,7 +58,7 @@
 
     @foreach ($tomesCollectionUser as $tt)
         <p>{{ $tt }}</p>
-        
+
     @endforeach
 
     <h2>Les éditions</h2>
@@ -92,7 +80,7 @@
             @endforeach
             </div>
         </div>
-        
+
     @endforeach
 
     <!-- PopUp ajout collection -->

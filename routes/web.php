@@ -20,6 +20,7 @@ use App\Http\Controllers\layouts\WithoutMenu;
 use App\Http\Controllers\layouts\WithoutNavbar;
 use App\Http\Controllers\Library\CollectionController;
 use App\Http\Controllers\Library\SerieController;
+use App\Http\Controllers\Library\TomeController;
 use App\Http\Controllers\pages\AccountSettingsAccount;
 use App\Http\Controllers\pages\AccountSettingsConnections;
 use App\Http\Controllers\pages\AccountSettingsNotifications;
@@ -70,6 +71,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/collection/recherche', [CollectionController::class, 'recherche'])->name('collection.recherche');
     Route::get('/collection', [CollectionController::class, 'index'])->name('collection.index');
 
+
+    //Tome
+    Route::get('/tomes/create', [TomeController::class, 'create'])->name('tome.create');
+    Route::get('/tomes/scan', [TomeController::class, 'scan'])->name('tome.scan');
+    Route::get('/tomes/store', [TomeController::class, 'store'])->name('tome.store');
 
 
 });
