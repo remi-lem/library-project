@@ -34,7 +34,7 @@ class TomeController extends Controller {
             }
         }
 
-        sort($editions);
+        asort($editions);
 
         $types = TypeLivre::all();
         $tags = Tag::all();
@@ -86,7 +86,7 @@ class TomeController extends Controller {
                 $tags = array_values($request->tags);
                 foreach ($tags as $tagId) {
                     TagTome::create([
-                        'ISBN' => $tome->id,
+                        'ISBN' => $tome->ISBN,
                         'idTag' => $tagId,
                     ]);
                 }
@@ -103,8 +103,8 @@ class TomeController extends Controller {
             return redirect()->route('tome.create')->with('success', 'Tome ajouté à votre collection !');
         } catch (QueryException $e) {
             DB::rollBack();
-
-            return back()->with('error', 'Une erreur est survenue lors de l\'ajout du tome.');
+            
+            return back()->with('error', 'Une erreur est survenue lors de l\'ajout du tome: ' . $e->getMessage());
         }
     }
 }

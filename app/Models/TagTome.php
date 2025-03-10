@@ -26,4 +26,9 @@ class TagTome extends Model
 		'ISBN' => 'float',
 		'idTag' => 'int'
 	];
+
+	protected $fillable = [
+		'ISBN',
+		'idTag'
+	];
 }
