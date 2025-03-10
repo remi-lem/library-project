@@ -8,12 +8,6 @@
             "url": "/"
         },
         {
-            "name": "Ma collection",
-            "icon": "menu-icon tf-icons bx bx-collection",
-            "slug": "collection.index",
-            "url": "/collection"
-        },
-        {
             "name": "Dashboard",
             "icon": "menu-icon tf-icons bx bx-chalkboard",
             "slug": "dashboard-library",

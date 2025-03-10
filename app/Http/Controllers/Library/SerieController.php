@@ -163,4 +163,19 @@ class SerieController extends Controller {
         return view('serie.show', compact('serie', 'editions', 'tomeEditions','cover','tags','auteurs','tomesCollectionUser'));
     }
 
+    public function create()
+    {
+        return view('serie.create');
+    }
+
+    public function store(Request $request)
+    {
+        Serie::create([
+            'nom' => $request->get('nom'),
+            'synopsis' => $request->get('synopsis'),
+        ]);
+
+        return redirect()->route('serie.create')->with('success', 'Série enregistré');
+    }
+
 }

@@ -52,16 +52,14 @@
                     <li>{{ $tag }}</li>
                 @endforeach
             </ul>
-            <p> <span class="fs-4 fw-bold"> Auteur(s) :</span> @foreach ($auteurs as $a) {{ $a }}, @endforeach</p>
+            <h4> Auteur(s) :</h4> <p> @foreach ($auteurs as $a) {{ $a }}, @endforeach</p>
         </div>
     </div>
 
-    @foreach ($tomesCollectionUser as $tt)
-        <p>{{ $tt }}</p>
-
-    @endforeach
-
     <h2>Les éditions</h2>
+
+    <p class="alert alert-secondary">Les <b>tomes transparents</b> ne font pas partie de ta collection. Clique dessus pour les ajouter.</p>
+
     @foreach ($editions as $e)
         <div class="edition">
             <h3>{{ $e->nom }}</h3>

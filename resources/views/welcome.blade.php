@@ -13,11 +13,11 @@
 
     @guest
         <a class="btn btn-primary" href="{{route('register')}}">Créer un compte</a>
-        <a class="btn btn-primary" href="{{route('dashboard-library')}}">Se connecter</a>
+        <a class="btn btn-primary" href="{{route('collection.')}}">Se connecter</a>
     @endguest
 
     @auth
-        <a class="btn btn-primary" href="{{route('dashboard-library')}}">Accéder à ma bibliothèque</a>
+        <a class="btn btn-primary" href="{{route('collection')}}">Accéder à ma bibliothèque</a>
     @endauth
 
     {{--//TODO presentation (image)--}}
