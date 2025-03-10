@@ -67,7 +67,7 @@
                             <select class="form-select" id="idAuteur" name="idAuteur" required>
                                 <option value="">Sélectionner un auteur</option>
                                 @foreach($auteurs as $auteur)
-                                    <option value="{{ $auteur->id }}" {{ old('idAuteur') == $auteur->id ? 'selected' : '' }}>{{ $auteur->nomComplet }}</option>
+                                    <option value="{{ $auteur->id }}" {{ (old('idAuteur') == $auteur->id || (isset($auteur_id) && $auteur_id == $auteur->id)) ? 'selected' : '' }}>{{ $auteur->nomComplet }}</option>
                                 @endforeach
                             </select>
                             <a href="{{ route('auteur.create') }}" type="button" class="btn btn-icon btn-secondary ms-2">

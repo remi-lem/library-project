@@ -8,10 +8,10 @@
             "url": "/"
         },
         {
-            "name": "Dashboard",
-            "icon": "menu-icon tf-icons bx bx-chalkboard",
-            "slug": "dashboard-library",
-            "url": "/dashboard-library"
+            "name": "Ma collection",
+            "icon": "menu-icon tf-icons bx bx-collection",
+            "slug": "collection",
+            "url": "/collection"
         },
         {
             "name" : "Les séries",

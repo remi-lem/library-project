@@ -15,11 +15,11 @@ class AuteurController extends Controller {
 
     public function store(Request $request)
     {
-        Auteur::create([
+        $auteur = Auteur::create([
             'nom' => $request->get('nom'),
             'prenom' => $request->get('prenom'),
         ]);
 
-        return redirect()->route('auteur.create')->with('success', 'Auteur enregistré');
+        return redirect()->route('tome.create', ['idAuteur' => $auteur->id])->with('success', 'Auteur enregistré');
     }
 }

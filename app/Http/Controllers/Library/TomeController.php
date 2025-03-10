@@ -10,6 +10,7 @@ use App\Models\Edition;
 use App\Models\GenreLivre;
 use App\Models\Serie;
 use App\Models\Tag;
+use App\Models\TagTome;
 use App\Models\Tome;
 use App\Models\TypeLivre;
 use Illuminate\Database\QueryException;
@@ -87,7 +88,13 @@ class TomeController extends Controller {
             ]);
 
             if ($request->has('tags')) {
-                $tome->tags()->attach($request->tags);
+                $tags = $request->tags;
+                foreach ($tags as $tagId) {
+                    TagTome::create([
+                        'ISBN' => $tome->id,
+                        'idTag' => $tagId,
+                    ]);
+                }
             }
 
             $userId = auth()->id();
