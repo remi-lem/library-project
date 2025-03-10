@@ -20,6 +20,7 @@ class AuteurController extends Controller {
             'prenom' => $request->get('prenom'),
         ]);
 
-        return redirect()->route('tome.create', ['idAuteur' => $auteur->id])->with('success', 'Auteur enregistré');
+        return redirect()->route('tome.create')->with(['success' => 'Auteur enregistré', 'idAuteur' => $auteur->id]);
+
     }
 }

@@ -41,7 +41,9 @@
                         <textarea class="form-control" id="synopsis" name="synopsis" required>{{ old('synopsis') }}</textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
                 </div>
             </form>
         </div>

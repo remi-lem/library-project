@@ -170,12 +170,13 @@ class SerieController extends Controller {
 
     public function store(Request $request)
     {
-        Serie::create([
+        $serie = Serie::create([
             'nom' => $request->get('nom'),
             'synopsis' => $request->get('synopsis'),
         ]);
 
-        return redirect()->route('serie.create')->with('success', 'Série enregistré');
+        return redirect()->route('edition.create')->with(['success' => 'Série enregistré', 'idSerie' => $serie->id]);
+
     }
 
 }

@@ -15,10 +15,11 @@ class GenreLivreController extends Controller {
 
     public function store(Request $request)
     {
-        GenreLivre::create([
+        $genreLivre = GenreLivre::create([
             'nom' => $request->get('nom'),
         ]);
 
-        return redirect()->route('genreLivre.create')->with('success', 'Genre crée');
+        return redirect()->route('tome.create')->with(['success' => 'Genre enregistré', 'idGenreLivre' => $genreLivre->id]);
+
     }
 }

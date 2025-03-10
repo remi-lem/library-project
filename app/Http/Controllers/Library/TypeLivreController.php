@@ -15,10 +15,11 @@ class TypeLivreController extends Controller {
 
     public function store(Request $request)
     {
-        TypeLivre::create([
+        $typeLivre = TypeLivre::create([
             'nom' => $request->get('nom'),
         ]);
 
-        return redirect()->route('typeLivre.create')->with('success', 'Type crée');
+        return redirect()->route('tome.create')->with(['success' => 'Type enregistré', 'idTypeLivre' => $typeLivre->id]);
+
     }
 }

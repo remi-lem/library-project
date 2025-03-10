@@ -47,7 +47,7 @@
                             <select class="form-select" id="idEditeur" name="idEditeur" required>
                                 <option value="">Sélectionner un éditeur</option>
                                 @foreach($editeurs as $editeur)
-                                    <option value="{{ $editeur->id }}" {{ old('idEditeur') == $editeur->id ? 'selected' : '' }}>{{ $editeur->nom }}</option>
+                                    <option value="{{ $editeur->id }}" {{ session('idEditeur') == $editeur->id || old('idEditeur') == $editeur->id ? 'selected' : '' }}>{{ $editeur->nom }}</option>
                                 @endforeach
                             </select>
                             <a href="{{ route('editeur.create') }}" type="button" class="btn btn-icon btn-secondary ms-2">
@@ -67,7 +67,7 @@
                             <select class="form-select" id="idAuteur" name="idAuteur" required>
                                 <option value="">Sélectionner un auteur</option>
                                 @foreach($auteurs as $auteur)
-                                    <option value="{{ $auteur->id }}" {{ (old('idAuteur') == $auteur->id || (isset($auteur_id) && $auteur_id == $auteur->id)) ? 'selected' : '' }}>{{ $auteur->nomComplet }}</option>
+                                    <option value="{{ $auteur->id }}" {{ session('idAuteur') == $auteur->id || old('idAuteur') == $auteur->id ? 'selected' : '' }}>{{ $auteur->nomComplet }}</option>
                                 @endforeach
                             </select>
                             <a href="{{ route('auteur.create') }}" type="button" class="btn btn-icon btn-secondary ms-2">
@@ -82,7 +82,7 @@
                             <select class="form-select" id="idGenreLivre" name="idGenreLivre" required>
                                 <option value="">Sélectionner un genre</option>
                                 @foreach($genres as $genre)
-                                    <option value="{{ $genre->id }}" {{ old('idGenreLivre') == $genre->id ? 'selected' : '' }}>{{ $genre->nom }}</option>
+                                    <option value="{{ $genre->id }}" {{ session('idGenreLivre') == $genre->id || old('idGenreLivre') == $genre->id ? 'selected' : '' }}>{{ $genre->nom }}</option>
                                 @endforeach
                             </select>
                             <a href="{{ route('genreLivre.create') }}" type="button" class="btn btn-icon btn-secondary ms-2">
@@ -107,7 +107,7 @@
                             <select class="form-select" id="idEdition" name="idEdition">
                                 <option value="">Sélectionner une édition</option>
                                 @foreach($editions as $key => $value)
-                                    <option value="{{ $key }}" {{ old('idEdition') == $key ? 'selected' : '' }}>{{ $value }}</option>
+                                    <option value="{{ $key }}" {{ session('idEdition') == $key || old('idEdition') == $key ? 'selected' : '' }}>{{ $value }}</option>
                                 @endforeach
                             </select>
                             <a href="{{ route('edition.create') }}" type="button" class="btn btn-icon btn-secondary ms-2">
@@ -122,7 +122,7 @@
                             <select class="form-select" id="idTypeLivre" name="idTypeLivre" required>
                                 <option value="">Sélectionner un type de livre</option>
                                 @foreach($types as $type)
-                                    <option value="{{ $type->id }}" {{ old('idTypeLivre') == $type->id ? 'selected' : '' }}>{{ $type->nom }}</option>
+                                    <option value="{{ $type->id }}" {{ session('idTypeLivre') == $type->id || old('idTypeLivre') == $type->id ? 'selected' : '' }}>{{ $type->nom }}</option>
                                 @endforeach
                             </select>
                             <a href="{{ route('typeLivre.create') }}" type="button" class="btn btn-icon btn-secondary ms-2">
@@ -136,7 +136,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <select class="form-select" id="tags" name="tags[]" multiple>
                                 @foreach($tags as $tag)
-                                    <option value="{{ $tag->id }}" {{ in_array($tag->id, old('tags', [])) ? 'selected' : '' }}>{{ $tag->nom }}</option>
+                                    <option value="{{ $tag->id }}" {{ session('idTag') == $tag->id || in_array($tag->id, old('tags', [])) ? 'selected' : '' }}>{{ $tag->nom }}</option>
                                 @endforeach
                             </select>
                             <a href="{{ route('tag.create') }}" type="button" class="btn btn-icon btn-secondary ms-2">
@@ -145,7 +145,9 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
                 </div>
             </form>
         </div>

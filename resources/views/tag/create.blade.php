@@ -37,7 +37,9 @@
                         <input type="text" class="form-control" id="nom" name="nom" value="{{ old('nom') }}" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
                 </div>
             </form>
         </div>

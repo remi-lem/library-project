@@ -18,11 +18,12 @@ class EditionController extends Controller {
 
     public function store(Request $request)
     {
-        Edition::create([
+        $edition = Edition::create([
             'nom' => $request->get('nom'),
             'idSerie' => $request->get('idSerie'),
         ]);
 
-        return redirect()->route('edition.create')->with('success', 'Éditeur crée');
+        return redirect()->route('tome.create')->with(['success' => 'Édition enregistré', 'idEdition' => $edition->id]);
+
     }
 }

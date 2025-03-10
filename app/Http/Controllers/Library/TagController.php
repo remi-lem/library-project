@@ -15,10 +15,11 @@ class TagController extends Controller {
 
     public function store(Request $request)
     {
-        Tag::create([
+        $tag = Tag::create([
             'nom' => $request->get('nom'),
         ]);
 
-        return redirect()->route('tag.create')->with('success', 'Tag crée');
+        return redirect()->route('tome.create')->with(['success' => 'Tag enregistré', 'idTag' => $tag->id]);
+
     }
 }

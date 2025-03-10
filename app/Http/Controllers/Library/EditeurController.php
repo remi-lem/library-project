@@ -15,10 +15,10 @@ class EditeurController extends Controller {
 
     public function store(Request $request)
     {
-        Editeur::create([
+        $editeur = Editeur::create([
             'nom' => $request->get('nom'),
         ]);
 
-        return redirect()->route('editeur.create')->with('success', 'Éditeur crée');
+        return redirect()->route('tome.create')->with(['success' => 'Editeur enregistré', 'idEditeur' => $editeur->id]);
     }
 }

@@ -68,10 +68,23 @@ class TomeController extends Controller {
 
             DB::beginTransaction();
 
+            if ($request->filled('couverture')) {
+                $couverture = $request->couverture;
+            } else {
+                $edition = Edition::find($request->idEdition);
+
+                if ($edition && $edition->serie) {
+                    $pattern = config('library.urlPattern');
+                    $couverture = str_replace('<IMG>', $request->ISBN, $pattern);
+                } else {
+                    $couverture = null;
+                }
+            }
+
             $tome = Tome::create([
                 'ISBN' => $request->ISBN,
                 'titre' => $request->titre,
-                'couverture' => $request->couverture,
+                'couverture' => $couverture,
                 'dateParution' => $request->dateParution,
                 'numero' => $request->numero,
                 'idEditeur' => $request->idEditeur,
@@ -82,7 +95,6 @@ class TomeController extends Controller {
             ]);
 
             if ($request->has('tags')) {
-                $tags = $request->tags;
                 $tags = array_values($request->tags);
                 foreach ($tags as $tagId) {
                     TagTome::create([
@@ -103,7 +115,7 @@ class TomeController extends Controller {
             return redirect()->route('tome.create')->with('success', 'Tome ajouté à votre collection !');
         } catch (QueryException $e) {
             DB::rollBack();
-            
+
             return back()->with('error', 'Une erreur est survenue lors de l\'ajout du tome: ' . $e->getMessage());
         }
     }
