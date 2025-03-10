@@ -34,6 +34,8 @@ class TomeController extends Controller {
             }
         }
 
+        sort($editions);
+
         $types = TypeLivre::all();
         $tags = Tag::all();
 
@@ -46,6 +48,7 @@ class TomeController extends Controller {
 
     public function store(Request $request)
     {
+
         $request->validate([
             'ISBN' => 'required|numeric|min:0|max:9999999999999',
             'titre' => 'required|string|max:255',
@@ -89,6 +92,7 @@ class TomeController extends Controller {
 
             if ($request->has('tags')) {
                 $tags = $request->tags;
+                $tags = array_values($request->tags);
                 foreach ($tags as $tagId) {
                     TagTome::create([
                         'ISBN' => $tome->id,
