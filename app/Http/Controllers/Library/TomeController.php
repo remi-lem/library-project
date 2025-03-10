@@ -68,15 +68,6 @@ class TomeController extends Controller {
 
             DB::beginTransaction();
 
-            $serie = Serie::firstOrCreate([
-                'nom' => $request->titre,
-            ]);
-
-            $edition = Edition::firstOrCreate([
-                'nom' => $request->titre,
-                'idSerie' => $serie->id
-            ]);
-
             $tome = Tome::create([
                 'ISBN' => $request->ISBN,
                 'titre' => $request->titre,
@@ -86,7 +77,7 @@ class TomeController extends Controller {
                 'idEditeur' => $request->idEditeur,
                 'idAuteur' => $request->idAuteur,
                 'idGenreLivre' => $request->idGenreLivre,
-                'idEdition' => $edition->id,
+                'idEdition' => $request->idEdition,
                 'idTypeLivre' => $request->idTypeLivre
             ]);
 
