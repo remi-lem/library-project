@@ -13,7 +13,7 @@
 
     @guest
         <a class="btn btn-primary" href="{{route('register')}}">Créer un compte</a>
-        <a class="btn btn-primary" href="{{route('collection.')}}">Se connecter</a>
+        <a class="btn btn-primary" href="{{route('collection')}}">Se connecter</a>
     @endguest
 
     @auth
