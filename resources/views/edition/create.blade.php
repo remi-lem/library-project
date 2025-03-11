@@ -49,7 +49,7 @@
 
                     <div class="mb-3 col-md-6 col-12">
                         <label for="nom" class="form-label">Nom de l'édition</label>
-                        <input type="text" class="form-control" id="nom" name="nom" value="{{ old('nom') }}" required>
+                        <input type="text" class="form-control" id="nom" name="nom" value="{{ old('nom') ?? 'Édition par défaut' }}" required>
                     </div>
 
                     <div class="d-flex justify-content-end">

@@ -38,7 +38,7 @@
 
                     <div class="mb-3 col-12">
                         <label for="synopsis" class="form-label">Synopsis</label>
-                        <textarea class="form-control" id="synopsis" name="synopsis" required>{{ old('synopsis') }}</textarea>
+                        <textarea class="form-control" id="synopsis" name="synopsis" maxlength="2048">{{ old('synopsis') }}</textarea>
                     </div>
 
                     <div class="d-flex justify-content-end">
