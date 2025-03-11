@@ -2,7 +2,7 @@
 
 @if (request()->route()->getName() == 'serie.index' || request()->route()->getName() == 'serie.recherche')
     @section('title', 'Les séries')
-@elseif (request()->route()->getName() == 'collection.index'|| request()->route()->getName() == 'collection.recherche')
+@elseif (request()->route()->getName() == 'collection'|| request()->route()->getName() == 'collection.recherche')
     @section('title', 'Ma Collection')
 @endif
 

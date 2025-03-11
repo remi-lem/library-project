@@ -56,10 +56,10 @@
                         </div>
                     </div>
 
-                    <div class="mb-3 col-md-6 col-12">
+                    {{--<div class="mb-3 col-md-6 col-12">
                         <label for="couverture" class="form-label">URL de la couverture</label>
                         <input type="text" class="form-control" id="couverture" name="couverture" value="{{ old('couverture') }}">
-                    </div>
+                    </div>--}}
 
                     <div class="mb-3 col-md-6 col-12">
                         <label for="idAuteur" class="form-label">Auteur</label>

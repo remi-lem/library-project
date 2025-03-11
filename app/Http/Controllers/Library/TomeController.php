@@ -71,10 +71,10 @@ class TomeController extends Controller {
             if ($request->filled('couverture')) {
                 $couverture = $request->couverture;
             } else {
-                $edition = Edition::find($request->idEdition);
+                $editeur = Editeur::find($request->idEditeur);
 
-                if ($edition && $edition->serie) {
-                    $pattern = config('library.urlPattern');
+                if ($editeur && $editeur->imgPattern) {
+                    $pattern = $editeur->imgPattern;
                     $couverture = str_replace('<IMG>', $request->ISBN, $pattern);
                 } else {
                     $couverture = null;
