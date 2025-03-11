@@ -2,6 +2,9 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\Resources\EditeurResource\Pages\CreateEditeur;
+use App\Filament\Admin\Resources\EditeurResource\Pages\EditEditeur;
+use App\Filament\Admin\Resources\EditeurResource\Pages\ListEditeurs;
 use App\Filament\Resources\EditeurResource\Pages;
 use App\Models\Editeur;
 use Filament\Forms\Components\TextInput;
@@ -64,9 +67,9 @@ class EditeurResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => \App\Filament\Admin\Resources\EditeurResource\Pages\ListEditeurs::route('/'),
-            'create' => \App\Filament\Admin\Resources\EditeurResource\Pages\CreateEditeur::route('/create'),
-            'edit' => \App\Filament\Admin\Resources\EditeurResource\Pages\EditEditeur::route('/{record}/edit'),
+            'index' => ListEditeurs::route('/'),
+            'create' => CreateEditeur::route('/create'),
+            'edit' => EditEditeur::route('/{record}/edit'),
         ];
     }
 }

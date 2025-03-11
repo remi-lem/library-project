@@ -2,6 +2,9 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\Resources\GenreLivreResource\Pages\CreateGenreLivre;
+use App\Filament\Admin\Resources\GenreLivreResource\Pages\EditGenreLivre;
+use App\Filament\Admin\Resources\GenreLivreResource\Pages\ListGenreLivres;
 use App\Filament\Resources\GenreLivreResource\Pages;
 use App\Models\GenreLivre;
 use Filament\Forms\Components\TextInput;
@@ -58,9 +61,9 @@ class GenreLivreResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => \App\Filament\Admin\Resources\GenreLivreResource\Pages\ListGenreLivres::route('/'),
-            'create' => \App\Filament\Admin\Resources\GenreLivreResource\Pages\CreateGenreLivre::route('/create'),
-            'edit' => \App\Filament\Admin\Resources\GenreLivreResource\Pages\EditGenreLivre::route('/{record}/edit'),
+            'index' => ListGenreLivres::route('/'),
+            'create' => CreateGenreLivre::route('/create'),
+            'edit' => EditGenreLivre::route('/{record}/edit'),
         ];
     }
 }

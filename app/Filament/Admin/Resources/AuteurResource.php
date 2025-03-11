@@ -2,6 +2,9 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\Resources\AuteurResource\Pages\CreateAuteur;
+use App\Filament\Admin\Resources\AuteurResource\Pages\EditAuteur;
+use App\Filament\Admin\Resources\AuteurResource\Pages\ListAuteurs;
 use App\Filament\Resources\AuteurResource\Pages;
 use App\Models\Auteur;
 use Filament\Forms\Components\TextInput;
@@ -64,9 +67,9 @@ class AuteurResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => \App\Filament\Admin\Resources\AuteurResource\Pages\ListAuteurs::route('/'),
-            'create' => \App\Filament\Admin\Resources\AuteurResource\Pages\CreateAuteur::route('/create'),
-            'edit' => \App\Filament\Admin\Resources\AuteurResource\Pages\EditAuteur::route('/{record}/edit'),
+            'index' => ListAuteurs::route('/'),
+            'create' => CreateAuteur::route('/create'),
+            'edit' => EditAuteur::route('/{record}/edit'),
         ];
     }
 }

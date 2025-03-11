@@ -2,6 +2,9 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\Resources\TypeLivreResource\Pages\CreateTypeLivre;
+use App\Filament\Admin\Resources\TypeLivreResource\Pages\EditTypeLivre;
+use App\Filament\Admin\Resources\TypeLivreResource\Pages\ListTypeLivres;
 use App\Filament\Resources\TypeLivreResource\Pages;
 use App\Models\TypeLivre;
 use Filament\Forms\Components\TextInput;
@@ -58,9 +61,9 @@ class TypeLivreResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => \App\Filament\Admin\Resources\TypeLivreResource\Pages\ListTypeLivres::route('/'),
-            'create' => \App\Filament\Admin\Resources\TypeLivreResource\Pages\CreateTypeLivre::route('/create'),
-            'edit' => \App\Filament\Admin\Resources\TypeLivreResource\Pages\EditTypeLivre::route('/{record}/edit'),
+            'index' => ListTypeLivres::route('/'),
+            'create' => CreateTypeLivre::route('/create'),
+            'edit' => EditTypeLivre::route('/{record}/edit'),
         ];
     }
 }

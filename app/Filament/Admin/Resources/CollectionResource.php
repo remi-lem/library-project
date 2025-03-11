@@ -2,6 +2,9 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\Resources\CollectionResource\Pages\CreateCollection;
+use App\Filament\Admin\Resources\CollectionResource\Pages\EditCollection;
+use App\Filament\Admin\Resources\CollectionResource\Pages\ListCollections;
 use App\Filament\Resources\CollectionResource\Pages;
 use App\Models\Collection;
 use Filament\Forms\Components\Select;
@@ -72,9 +75,9 @@ class CollectionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => \App\Filament\Admin\Resources\CollectionResource\Pages\ListCollections::route('/'),
-            'create' => \App\Filament\Admin\Resources\CollectionResource\Pages\CreateCollection::route('/create'),
-            'edit' => \App\Filament\Admin\Resources\CollectionResource\Pages\EditCollection::route('/{record}/edit'),
+            'index' => ListCollections::route('/'),
+            'create' => CreateCollection::route('/create'),
+            'edit' => EditCollection::route('/{record}/edit'),
         ];
     }
 }

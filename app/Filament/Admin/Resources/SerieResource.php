@@ -2,6 +2,9 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\Resources\SerieResource\Pages\CreateSerie;
+use App\Filament\Admin\Resources\SerieResource\Pages\EditSerie;
+use App\Filament\Admin\Resources\SerieResource\Pages\ListSeries;
 use App\Filament\Resources\SerieResource\Pages;
 use App\Models\Serie;
 use Filament\Forms\Components\Textarea;
@@ -65,9 +68,9 @@ class SerieResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => \App\Filament\Admin\Resources\SerieResource\Pages\ListSeries::route('/'),
-            'create' => \App\Filament\Admin\Resources\SerieResource\Pages\CreateSerie::route('/create'),
-            'edit' => \App\Filament\Admin\Resources\SerieResource\Pages\EditSerie::route('/{record}/edit'),
+            'index' => ListSeries::route('/'),
+            'create' => CreateSerie::route('/create'),
+            'edit' => EditSerie::route('/{record}/edit'),
         ];
     }
 }

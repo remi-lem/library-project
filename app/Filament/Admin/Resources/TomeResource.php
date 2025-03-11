@@ -2,6 +2,9 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\Resources\TomeResource\Pages\CreateTome;
+use App\Filament\Admin\Resources\TomeResource\Pages\EditTome;
+use App\Filament\Admin\Resources\TomeResource\Pages\ListTomes;
 use App\Filament\Resources\TomeResource\Pages;
 use App\Models\Tome;
 use Filament\Forms\Components\DatePicker;
@@ -196,9 +199,9 @@ class TomeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => \App\Filament\Admin\Resources\TomeResource\Pages\ListTomes::route('/'),
-            'create' => \App\Filament\Admin\Resources\TomeResource\Pages\CreateTome::route('/create'),
-            'edit' => \App\Filament\Admin\Resources\TomeResource\Pages\EditTome::route('/{record}/edit'),
+            'index' => ListTomes::route('/'),
+            'create' => CreateTome::route('/create'),
+            'edit' => EditTome::route('/{record}/edit'),
         ];
     }
 }

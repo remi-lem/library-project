@@ -2,6 +2,9 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\Resources\EditionResource\Pages\CreateEdition;
+use App\Filament\Admin\Resources\EditionResource\Pages\EditEdition;
+use App\Filament\Admin\Resources\EditionResource\Pages\ListEditions;
 use App\Filament\Resources\EditionResource\Pages;
 use App\Models\Edition;
 use Filament\Forms\Components\Select;
@@ -76,9 +79,9 @@ class EditionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => \App\Filament\Admin\Resources\EditionResource\Pages\ListEditions::route('/'),
-            'create' => \App\Filament\Admin\Resources\EditionResource\Pages\CreateEdition::route('/create'),
-            'edit' => \App\Filament\Admin\Resources\EditionResource\Pages\EditEdition::route('/{record}/edit'),
+            'index' => ListEditions::route('/'),
+            'create' => CreateEdition::route('/create'),
+            'edit' => EditEdition::route('/{record}/edit'),
         ];
     }
 }
