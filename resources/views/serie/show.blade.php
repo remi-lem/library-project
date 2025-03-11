@@ -67,7 +67,7 @@
             @foreach ($tomeEditions[$e->id]->chunk(10) as $chunk)
                 <div class="row mb-3">
                 @foreach ($chunk as $tome)
-                    <div class="col-md-1">
+                    <div class="col-6 col-sm-4 col-md-2">
                         <div class="tome-container">
                             <img src="{{ ($tome->couverture != "") ? $tome->couverture : asset('images/noCover.png') }}" alt="couverture" class="img-fluid tome-image" style="{{ in_array($tome->ISBN, $tomesCollectionUser) ? '' : 'opacity: 0.5;' }}; cursor: pointer;" onmouseover="this.style.opacity=1;" onmouseout="this.style.opacity='{{ in_array($tome->ISBN, $tomesCollectionUser) ? '1' : '0.5' }}';" onclick="showPopup('{{ $tome->ISBN }}', '{{ $tome->titre }}', '{{ in_array($tome->ISBN, $tomesCollectionUser) ? 'remove' : 'add' }}')">
                             <div class="tome-title">{{ $tome->titre }}</div>
