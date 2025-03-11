@@ -60,8 +60,6 @@ class TomeController extends Controller {
             'numero' => 'required|numeric|min:1',
             'idEdition' => 'nullable|exists:Edition,id',
             'idTypeLivre' => 'required|exists:TypeLivre,id',
-            'tags' => 'nullable|array',
-            'tags.*' => 'exists:TagTome,idTag'
         ]);
 
         try {
