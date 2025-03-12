@@ -2,6 +2,36 @@
 
 @section('title', 'Ajouter à ma collection')
 
+@section('page-script')
+    <script>
+        let inputISBN = document.getElementById('ISBN');
+        let img = document.getElementById('couverture');
+        let imgBox = document.getElementById('couvertureBox');
+        let loader = document.getElementById('loader');
+
+        img.onload = function () { hideLoader(); };
+        img.onerror = function () { hideLoader(); };
+
+        inputISBN.addEventListener("focusout", function() {
+            let ISBN = document.getElementById('ISBN').value;
+            let isValid = /^[0-9]{10}$|^[0-9]{13}$/.test(ISBN);
+            if (isValid) {
+                let urlCouv = '{{ $urlCouv }}';
+                urlCouv = urlCouv.replace('&lt;IMG&gt;', ISBN);
+                img.src = urlCouv;
+                loader.classList.remove("d-none");
+                imgBox.classList.remove("d-none");
+            } else {
+                imgBox.classList.add("d-none");
+            }
+        });
+
+        function hideLoader() {
+            loader.classList.add("d-none");
+        }
+    </script>
+@endsection
+
 @section('content')
     <h1>Ajouter un tome à ma collection</h1>
     @if ($errors->any())
@@ -148,6 +178,16 @@
                     <div class="d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary">Enregistrer</button>
                     </div>
+
+                    <div class="my-3 col-md-6 col-12 d-none" id="couvertureBox">
+                        <div class="d-flex flex-column align-items-center">
+                            <div id="loader" class="spinner-border text-primary d-none" role="status"></div>
+                            <img id="couverture" src="" class="img-fluid rounded"
+                                 style="max-width: 150px; max-height: 200px;" alt="Couverture indisponible">
+                            <small class="text-muted mt-2">Aperçu de la couverture</small>
+                        </div>
+                    </div>
+
                 </div>
             </form>
         </div>

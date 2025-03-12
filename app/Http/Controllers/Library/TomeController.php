@@ -39,7 +39,10 @@ class TomeController extends Controller {
         $types = TypeLivre::all();
         $tags = Tag::all();
 
-        return view('tome.create', compact('editeurs', 'auteurs', 'genres', 'editions', 'types', 'tags'));
+        // On récupère le pattern de la première édition, la logique changera si la valeur défaut de la base de données change
+        $urlCouv = $editeurs->first()->imgPattern;
+
+        return view('tome.create', compact('editeurs', 'auteurs', 'genres', 'editions', 'types', 'tags', 'urlCouv'));
     }
 
     public function scan(){
