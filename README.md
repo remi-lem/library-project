@@ -1,14 +1,18 @@
-# Library Project
+# Projet Bibliotech
 
 # Présentation
 
-Projet réalisé en APP3 à Polytech Paris-Saclay
+Projet réalisé en APP3 à Polytech Paris-Saclay.
 
 Projet réalisé par :
 - [Wilhem M.](https://github.com/Guenks)
 - [Rémi L.](https://github.com/remi-lem/)
 
 ## Mise en place
+- Récupérer le fichier .env s'il n'est pas déjà fourni
+- Installer PHP, Composer et NPM
+- Activer les modules `fileinfo`, `intl`, `mysqli`, `pdo_mysql` et `zip` dans php.ini
+- Effectuer les commandes suivantes :
 ```shell
 composer update
 composer install
@@ -23,18 +27,18 @@ php artisan serve
 ```
 
 ## Déploiement
-- récupérer le projet via git
-  - le token est à récupérer sur [Github](https://github.com/settings/personal-access-tokens/) : accès read-only sur Contents pour ce repo
+- Récupérer le projet via git
+  - Le token est à récupérer sur [Github](https://github.com/settings/personal-access-tokens/) : accès read-only sur Contents pour ce repository
 ```shell
 git clone https://<USER>:<TOKEN>@github.com/remi-lem/library-project.git
 ```
-- récupérer le fichier .env et modifier les valeurs suivantes
+- Récupérer le fichier .env et modifier les valeurs suivantes :
 ```
 APP_ENV=production
 APP_DEBUG=false
 APP_URL=http://localhost
 ```
-- effectuer les commandes de mise en place
+- Effectuer les commandes de mise en place :
 ```shell
 composer update
 composer install --no-dev
@@ -42,12 +46,7 @@ npm update
 npm install --omit=dev
 npm run build
 ```
-- mettre la racine du serveur sur /public
-
-## Accès
-/ : dashboard  
-/login : accès au compte  
-/admin : accès au dashboard d'administration filament  
+- Faire pointer la racine du serveur web sur /public
 
 ## Outils utilisés
 ### Frameworks
